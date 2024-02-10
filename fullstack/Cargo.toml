@@ -1,0 +1,29 @@
+# Web
+# dx build --features fullstack --release
+# cargo run --features ssr --release
+
+# Desktop
+# dx serve --hot-reload --platform desktop
+
+[package]
+name = "visp_fullstack"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { version = "*"}
+dioxus-fullstack = { version = "*" }
+
+[dependencies.visp_common]
+path = "../common"
+package = "visp_common"
+features = ["desktop"]
+
+[features]
+default = []
+ssr = ["dioxus-fullstack/axum"]
+web = ["dioxus-fullstack/web"]
