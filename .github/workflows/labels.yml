@@ -1,16 +1,7 @@
 ---
 name: "Maintain Repository Labels"
-
-on:
-  label:
-    types: [created, edited, deleted]
-  push:
-    branches: [master, main]
-    paths:
-      - .github/labels.json
-      - .github/labels.yml
-      - .github/workflows/labels.yml
-  workflow_dispatch:
+# Trigger manually
+workflow_dispatch:
 
 permissions:
   issues: write
@@ -37,3 +28,34 @@ jobs:
           LABEL_CONFIG_PATH: https://raw.githubusercontent.com/seantrane/github-label-presets/main/labels.json
           # Use your own labels:
           # LABEL_CONFIG_PATH: .github/labels.json
+
+
+name: Sync labels
+on:
+  # You can run this with every type of event, but it's better to run it only when you actually need it.
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/labels.yml
+
+      - uses: EndBug/label-sync@v2
+        with:
+          config-file: https://raw.githubusercontent.com/seantrane/github-label-presets/main/labels.yml
+
+          # If you want to delete any additional label, set this to true
+          delete-other-labels: false
+
+          # If you want the action just to show you the preview of the changes, without actually editing the labels, set this to true
+          dry-run: false
+
+          # You can change the token used to change the labels, this is the default one
+          token: ${{ secrets.GITHUB_TOKEN }}
