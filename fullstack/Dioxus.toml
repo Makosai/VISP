@@ -1,0 +1,55 @@
+[bundler]
+# Bundle identifier
+identifier = "io.kristech.visp"
+
+# Bundle publisher
+publisher = "Quaint Studios"
+
+# Bundle icon
+icon = ["icons/icon.png"]
+
+# Bundle resources
+resources = ["public/*"]
+
+[application]
+
+# App (Project) Name
+name = "VISP"
+
+# Dioxus App Default Platform
+# desktop, fullstack
+default_platform = "web"
+
+# `build` & `serve` dist path
+out_dir = "dist"
+
+# resource (public) file folder
+asset_dir = "public"
+
+[web.app]
+
+# HTML title tag content
+title = "VISP - Video / Image / Sound / Post"
+
+[web.watcher]
+
+# when watcher trigger, regenerate the `index.html`
+reload_html = true
+
+# which files or dirs will be watcher monitoring
+watch_path = ["src", "public"]
+
+# include `assets` in fullstack platform
+[web.resource]
+
+# CSS style file
+style = ["tailwind.css"]
+
+# Javascript code file
+script = []
+
+[web.resource.dev]
+
+# Javascript code file
+# serve: [dev-server] only
+script = []

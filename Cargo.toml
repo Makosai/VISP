@@ -1,15 +1,17 @@
+[workspace]
+members = ["desktop", "fullstack", "common"]
+resolver = "2"
+
 [package]
 name = "VISP"
 version = "0.1.0"
 edition = "2021"
+authors = ["Kristopher Ali <kristopher.ali.dev+visp@gmail.com>"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "fullstack"
+path = "fullstack/src/main.rs"
 
-[dependencies]
-dioxus = "0.4.3"
-dioxus-fullstack = "0.4.3"
-
-[features]
-default = []
-ssr = ["dioxus-fullstack/axum"]
-web = ["dioxus-fullstack/web"]
+[[bin]]
+name = "desktop"
+path = "desktop/src/main.rs"
