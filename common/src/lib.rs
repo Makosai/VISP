@@ -1,6 +1,7 @@
-#![allow(non_snake_case, unused)]
 #![crate_type = "lib"]
 #![crate_name = "visp_common"]
+
+#![allow(non_snake_case, unused)]
 
 use dioxus_router::prelude::*;
 use dioxus::prelude::*;
@@ -12,10 +13,10 @@ use dioxus_fullstack::prelude::*;
 #[derive(Routable, PartialEq, Debug, Clone)]
 enum Route {
     #[layout(NavBar)]
-        #[route("/")]
-        Home {},
-        #[route("/other")]
-        Other {},
+    #[route("/")]
+    Home {},
+    #[route("/other")]
+    Other {},
     #[end_layout]
     //  if the current location doesn't match any of the above routes, render the NotFound component
     #[route("/:..route")]
@@ -73,12 +74,12 @@ pub fn app(cx: Scope) -> Element {
     }
 }
 
-#[cfg(feature = "desktop")]
+#[cfg(all(feature = "desktop", not(feature = "web")))]
 pub fn start_app(app: fn(Scope) -> Element) {
     dioxus_desktop::launch(app);
 }
 
-#[cfg(feature = "web")]
+#[cfg(all(feature = "web", not(feature = "desktop")))]
 pub fn start_app(app: fn(Scope) -> Element) {
     LaunchBuilder::new(app).launch()
 }

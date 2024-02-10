@@ -1,9 +1,13 @@
 [package]
 name = "visp_desktop"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-visp_common = { path = "../common", features = ["desktop"] }
+[dependencies.visp_common]
+path = "../common"
+package = "visp_common"
+features = ["desktop"]

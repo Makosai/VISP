@@ -7,15 +7,21 @@
 
 [package]
 name = "visp_fullstack"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 dioxus = { version = "*"}
 dioxus-fullstack = { version = "*" }
-visp_common = { path = "../common", features = ["web"] }
+
+[dependencies.visp_common]
+path = "../common"
+package = "visp_common"
+features = ["desktop"]
 
 [features]
 default = []
