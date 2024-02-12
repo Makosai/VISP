@@ -13,7 +13,7 @@ dioxus-desktop = { workspace = true, optional = true }
 
 [features]
 default = ["desktop"]
-web = ["dioxus-fullstack"]
+fullstack = ["dioxus-fullstack"]
 desktop = ["dioxus-desktop"]
 
 [lib]

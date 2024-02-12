@@ -1,10 +1,3 @@
-# Web
-# dx build --features fullstack --release
-# cargo run --features ssr --release
-
-# Desktop
-# dx serve --hot-reload --platform desktop
-
 [package]
 name = "visp_fullstack"
 version.workspace = true
@@ -12,16 +5,24 @@ edition.workspace = true
 authors.workspace = true
 description.workspace = true
 
+[package.metadata.bundle]
+name.workspace = true
+identifier.workspace = true
+version.workspace = true
+copyright.workspace = true
+categroy.workspace = true
+short_description.workspace = true
+long_description.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-dioxus = { version = "*"}
-dioxus-fullstack = { version = "*" }
+dioxus-fullstack = { workspace = true, optional = true }
 
 [dependencies.visp_common]
 path = "../common"
 package = "visp_common"
-features = ["desktop"]
+default-features = false
+features = ["fullstack"]
 
 [features]
 default = []

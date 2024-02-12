@@ -5,9 +5,25 @@ edition.workspace = true
 authors.workspace = true
 description.workspace = true
 
+[package.metadata.bundle]
+name.workspace = true
+identifier.workspace = true
+version.workspace = true
+copyright.workspace = true
+categroy.workspace = true
+short_description.workspace = true
+long_description.workspace = true
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus-desktop = { workspace = true, optional = true }
 
 [dependencies.visp_common]
 path = "../common"
 package = "visp_common"
+default-features = false
 features = ["desktop"]
+
+[features]
+bundle = []

@@ -6,10 +6,10 @@ identifier = "io.kristech.visp"
 publisher = "Quaint Studios"
 
 # Bundle icon
-icon = ["icons/icon.png"]
+icon = ["../common/icons/icon.ico"]
 
 # Bundle resources
-resources = ["public/*"]
+resources = ["../common/public/*"]
 
 [application]
 
@@ -18,13 +18,13 @@ name = "VISP"
 
 # Dioxus App Default Platform
 # desktop, fullstack
-default_platform = "fullstack"
+default_platform = "desktop"
 
 # `build` & `serve` dist path
 out_dir = "dist"
 
 # resource (public) file folder
-asset_dir = "public"
+asset_dir = "../common/public"
 
 [web.app]
 
@@ -37,13 +37,13 @@ title = "VISP - Video / Image / Sound / Post"
 reload_html = true
 
 # which files or dirs will be watcher monitoring
-watch_path = ["src", "public"]
+watch_path = ["src", "../common/src", "../common/public"]
 
 # include `assets` in fullstack platform
 [web.resource]
 
 # CSS style file
-style = ["tailwind.css"]
+style = ["../common/tailwind.css"]
 
 # Javascript code file
 script = []
