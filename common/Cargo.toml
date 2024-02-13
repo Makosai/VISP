@@ -1,19 +1,22 @@
+resolver.workspace = true
+
 [package]
 name = "visp_common"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors.workspace = true
+description.workspace = true
+
+[metadata.bundle]
+name.workspace = true
+identifier.workspace = true
+version.workspace = true
+copyright.workspace = true
+category.workspace = true
+short_description.workspace = true
+long_description.workspace = true
 
 [dependencies]
 dioxus = { workspace = true }
 dioxus-router = { workspace = true }
-dioxus-fullstack = { workspace = true, optional = true }
-dioxus-desktop = { workspace = true, optional = true }
-
-[features]
-default = ["desktop"]
-fullstack = ["dioxus-fullstack"]
-desktop = ["dioxus-desktop"]
-
-[lib]

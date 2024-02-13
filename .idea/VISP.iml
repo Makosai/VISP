@@ -5,10 +5,13 @@
       <sourceFolder url="file://$MODULE_DIR$/common/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/desktop/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/fullstack/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hold/fullstack/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hold/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hold/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/desktop/target" />
-      <excludeFolder url="file://$MODULE_DIR$/fullstack/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/hold/fullstack/target" />
+      <excludeFolder url="file://$MODULE_DIR$/hold/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,5 +1,7 @@
-use visp_common::start_app;
+use visp_common;
+
+use dioxus_fullstack::prelude::*;
 
 fn main() {
-    start_app(visp_common::app);
+    LaunchBuilder::new(visp_common::app).launch();
 }
