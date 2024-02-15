@@ -1,30 +1,31 @@
-[bundler]
-# Bundle identifier
-identifier = "io.kristech.visp"
-
-# Bundle publisher
-publisher = "Quaint Studios"
-
-# Bundle icon
-icon = ["icons/icon.png"]
-
-# Bundle resources
-resources = ["public/*"]
-
 [application]
 
 # App (Project) Name
 name = "VISP"
 
 # Dioxus App Default Platform
-# desktop, fullstack
-default_platform = "fullstack"
+# desktop, web
+default_platform = "web"
 
 # `build` & `serve` dist path
-out_dir = "dist"
+out_dir = "../dist/fullstack"
 
 # resource (public) file folder
-asset_dir = "public"
+asset_dir = "../common/public"
+
+# Bundle short description
+short_description = "Video. Image. Sound. Post. A versatile tool."
+
+# Bundle long description
+long_description = """
+Video. Images. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!
+"""
+
+[application.plugins]
+
+available = true
+
+required = []
 
 [web.app]
 
@@ -33,17 +34,19 @@ title = "VISP - Video / Image / Sound / Post"
 
 [web.watcher]
 
+index_on_404 = true
+
 # when watcher trigger, regenerate the `index.html`
 reload_html = true
 
 # which files or dirs will be watcher monitoring
-watch_path = ["src", "public"]
+watch_path = ["src", "../common/src", "../common/public"]
 
 # include `assets` in fullstack platform
 [web.resource]
 
 # CSS style file
-style = ["tailwind.css"]
+style = []
 
 # Javascript code file
 script = []
@@ -53,3 +56,22 @@ script = []
 # Javascript code file
 # serve: [dev-server] only
 script = []
+
+[bundler]
+# Bundle identifier
+identifier = "io.kristech.visp"
+
+# Bundle publisher
+publisher = "Quaint Studios"
+
+# Bundle icon
+icon = ["../common/icons/icon.ico"]
+
+# Bundle resources
+resources = ["../common/public/*"]
+
+# Bundle copyright
+copyright = "MIT"
+
+# Bundle category
+category = "Multimedia"
