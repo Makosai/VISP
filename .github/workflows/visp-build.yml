@@ -1,0 +1,38 @@
+name: VISP Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on:
+      labels: windows-latest-8-cores
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Get rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.76.0
+          target: x86_64-pc-windows-msvc
+      
+      - name: Install Dioxus CLI
+        run: cargo install dioxus-cli
+
+      - name: Build and Bundle Desktop
+        run: dx bundle --bin visp_desktop --features bundle --release      
+
+      - name: Build Web
+        run: dx build --bin visp_web --release
