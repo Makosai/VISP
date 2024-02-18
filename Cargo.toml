@@ -1,11 +1,11 @@
-# dx bundle --bin desktop --features bundle --release
+# Build Instructions
+# dx build --bin visp_desktop --release or dx bundle --bin visp_desktop --features bundle --release
 
-# dx build --bin fullstack --features web --release
-# cargo run --bin fullstack --features ssr --release
+# dx build --bin visp_web --release or dx serve --bin visp_web --release
 
 [workspace]
-members = ["common", "desktop", "fullstack"]
-default-members = ["desktop", "fullstack"]
+members = ["visp_common", "visp_desktop", "visp_web"]
+default-members = ["visp_desktop", "visp_web"]
 resolver = "2"
 
 [workspace.package]
@@ -24,8 +24,8 @@ dioxus-desktop = { version = "0.4.3" }
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 # Web
-# dx build --features fullstack --release
+# dx build --features visp_web --release
 # cargo run --features ssr --release
 
 # Desktop
-# dx serve --hot-reload --platform desktop
+# dx serve --hot-reload --platform visp_desktop

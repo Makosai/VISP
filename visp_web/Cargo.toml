@@ -1,5 +1,5 @@
 [package]
-name = "fullstack"
+name = "visp_web"
 version.workspace = true
 edition.workspace = true
 
@@ -20,5 +20,5 @@ Video. Images. Sound. Post. VISP is an open source multimedia editor built entir
 [dependencies]
 dioxus = { workspace = true }
 dioxus-web = { workspace = true }
-visp_common = { path = "../common" }
+visp_common = { path = "../visp_common" }
 

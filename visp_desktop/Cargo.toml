@@ -1,5 +1,5 @@
 [package]
-name = "desktop"
+name = "visp_desktop"
 version.workspace = true
 edition.workspace = true
 
@@ -21,4 +21,4 @@ Video. Images. Sound. Post. VISP is an open source multimedia editor built entir
 dioxus = { workspace = true }
 dioxus-desktop = { workspace = true }
 platform-dirs = "0.3.0"
-visp_common = { path = "../common" }
+visp_common = { path = "../visp_common" }
