@@ -19,10 +19,6 @@ Video. Images. Sound. Post. VISP is an open source multimedia editor built entir
 
 [dependencies]
 dioxus = { workspace = true }
-dioxus-fullstack = { workspace = true }
+dioxus-web = { workspace = true }
 visp_common = { path = "../common" }
 
-[features]
-default = []
-ssr = ["dioxus-fullstack/axum"]
-web = ["dioxus-fullstack/web"]

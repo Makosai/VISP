@@ -1,77 +1,40 @@
 [application]
+name = "VISP" # App (Project) Name
+default_platform = "desktop" # desktop, web
+out_dir = "../target-dist/desktop" # `build` & `serve` dist path
+asset_dir = "../common/public" # resource (public) file folder
 
-# App (Project) Name
-name = "VISP"
-
-# Dioxus App Default Platform
-# desktop, web
-default_platform = "desktop"
-
-# `build` & `serve` dist path
-out_dir = "../target-dist/desktop"
-
-# resource (public) file folder
-asset_dir = "../common/public"
-
-# Bundle short description
 short_description = "Video. Image. Sound. Post. A versatile tool."
-
-# Bundle long description
 long_description = """
 Video. Images. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!
 """
 
 [application.plugins]
-
 available = true
-
 required = []
 
 [web.app]
-
-# HTML title tag content
-title = "VISP - Video / Image / Sound / Post"
+title = "VISP - Video / Image / Sound / Post" # HTML title tag content
 
 [web.watcher]
-
 index_on_404 = true
-
-# when watcher trigger, regenerate the `index.html`
-reload_html = true
-
-# which files or dirs will be watcher monitoring
-watch_path = ["src", "../common/src", "../common/public"]
+reload_html = true # when watcher trigger, regenerate the `index.html`
+watch_path = ["src", "../common/src", "../common/public"] # which files or dirs will be watcher monitoring
 
 # include `assets` in fullstack platform
 [web.resource]
-
-# CSS style file
-style = []
-
-# Javascript code file
-script = []
+style = ["/assets/css/tailwind.css"] # CSS style file
+script = [] # Javascript code file
 
 [web.resource.dev]
-
-# Javascript code file
-# serve: [dev-server] only
-script = []
+script = [] # Javascript code file # serve: [dev-server] only
 
 [bundler]
-# Bundle identifier
-identifier = "io.kristech.visp"
+identifier = "io.kristech.visp" # Bundle identifier
+publisher = "Quaint Studios" # Bundle publisher
 
-# Bundle publisher
-publisher = "Quaint Studios"
+icon = ["../common/icons/icon.ico"] # Bundle icon
+resources = ["../common/public/*"] # Bundle resources
 
-# Bundle icon
-icon = ["../common/icons/icon.ico"]
-
-# Bundle resources
-resources = ["../common/public/*"]
-
-# Bundle copyright
-copyright = "MIT License Copyright (c) 2023-2024 Quaint Studios. All rights reserved."
-
-# Bundle category
-category = "Multimedia"
+copyright = "MIT License Copyright (c) 2023-2024 Quaint Studios. All rights reserved." # Bundle copyright
+category = "Multimedia" # Bundle category

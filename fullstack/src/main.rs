@@ -1,9 +1,12 @@
-#![allow(non_snake_case, unused)]
+#![allow(non_snake_case)]
 
+// VISP
 use visp_common;
 
-use dioxus_fullstack::prelude::*;
+// Dioxus
+use dioxus::prelude::*;
 
 fn main() {
-    LaunchBuilder::new(visp_common::app).launch();
+    // launch the web app
+    dioxus_web::launch(visp_common::app);
 }
