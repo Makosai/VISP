@@ -1,7 +1,7 @@
 #![allow(non_snake_case, unused)]
 
-use dioxus_router::prelude::*;
 use dioxus::prelude::*;
+use dioxus_router::prelude::*;
 
 // https://dioxuslabs.com/learn/0.4/router/example/full-code
 #[derive(Routable, PartialEq, Debug, Clone)]

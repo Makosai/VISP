@@ -1,5 +1,3 @@
-resolver.workspace = true
-
 [package]
 name = "desktop"
 version.workspace = true
@@ -8,19 +6,19 @@ edition.workspace = true
 authors.workspace = true
 description.workspace = true
 
-[metadata.bundle]
-name.workspace = true
-identifier.workspace = true
-version.workspace = true
-copyright.workspace = true
-category.workspace = true
-short_description.workspace = true
-long_description.workspace = true
+[package.metadata.bundle]
+name = "VISP"
+identifier = "io.kristech.visp"
+version = "0.1.0"
+copyright = "MIT License Copyright (c) 2023-2024 Quaint Studios. All rights reserved."
+category = "Multimedia"
+short_description = "Video. Image. Sound. Post. A versatile tool."
+long_description = """
+Video. Images. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!
+"""
 
 [dependencies]
 dioxus = { workspace = true }
 dioxus-desktop = { workspace = true }
+platform-dirs = "0.3.0"
 visp_common = { path = "../common" }
-
-[features]
-bundle = []

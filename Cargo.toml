@@ -1,7 +1,7 @@
 # dx bundle --bin desktop --features bundle --release
 
-# dx build --features web --release
-# cargo run --features ssr --release
+# dx build --bin fullstack --features web --release
+# cargo run --bin fullstack --features ssr --release
 
 [workspace]
 members = ["common", "desktop", "fullstack"]
@@ -9,22 +9,11 @@ default-members = ["desktop", "fullstack"]
 resolver = "2"
 
 [workspace.package]
-name = "visp"
+# name = "visp"
 version = "0.1.0"
 edition = "2021"
 authors = ["Kristopher Ali <kristopher.ali.dev+visp@gmail.com>"]
 description = "Video. Images. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!"
-
-[workspace.metadata.bundle]
-name = "visp"
-identifier = "io.kristech.visp"
-version = "0.1.0"
-copyright = "Copyright (c) Kristopher Ali 2024. All rights reserved."
-category = "multimedia, multimedia::video, multimedia::images, multimedia::audio, social"
-short_description = "Video. Image. Sound. Post. A versatile tool."
-long_description = """
-Video. Images. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!
-"""
 
 [workspace.dependencies]
 dioxus = { version = "*" }

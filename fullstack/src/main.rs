@@ -1,3 +1,5 @@
+#![allow(non_snake_case, unused)]
+
 use visp_common;
 
 use dioxus_fullstack::prelude::*;

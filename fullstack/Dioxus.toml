@@ -8,7 +8,7 @@ name = "VISP"
 default_platform = "web"
 
 # `build` & `serve` dist path
-out_dir = "../dist/fullstack"
+out_dir = "../target-dist/fullstack"
 
 # resource (public) file folder
 asset_dir = "../common/public"
@@ -71,7 +71,7 @@ icon = ["../common/icons/icon.ico"]
 resources = ["../common/public/*"]
 
 # Bundle copyright
-copyright = "MIT"
+copyright = "MIT License Copyright (c) 2023-2024 Quaint Studios. All rights reserved."
 
 # Bundle category
 category = "Multimedia"
