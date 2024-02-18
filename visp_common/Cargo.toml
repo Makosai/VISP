@@ -1,0 +1,11 @@
+[package]
+name = "visp_common"
+version.workspace = true
+edition.workspace = true
+
+authors.workspace = true
+description.workspace = true
+
+[dependencies]
+dioxus = { workspace = true }
+dioxus-router = { workspace = true }

@@ -20,6 +20,7 @@
 
 # Project
 **/dist
+**/target-dist
 
 # Added by cargo
 

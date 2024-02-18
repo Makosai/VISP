@@ -1,13 +1,7 @@
-#![crate_type = "lib"]
-#![crate_name = "visp_common"]
-
 #![allow(non_snake_case, unused)]
 
-use dioxus_router::prelude::*;
 use dioxus::prelude::*;
-
-#[cfg(feature = "web")]
-use dioxus_fullstack::prelude::*;
+use dioxus_router::prelude::*;
 
 // https://dioxuslabs.com/learn/0.4/router/example/full-code
 #[derive(Routable, PartialEq, Debug, Clone)]
@@ -72,14 +66,4 @@ pub fn app(cx: Scope) -> Element {
     render! {
         Router::<Route> { }
     }
-}
-
-#[cfg(all(feature = "desktop", not(feature = "web")))]
-pub fn start_app(app: fn(Scope) -> Element) {
-    dioxus_desktop::launch(app);
-}
-
-#[cfg(all(feature = "web", not(feature = "desktop")))]
-pub fn start_app(app: fn(Scope) -> Element) {
-    LaunchBuilder::new(app).launch()
 }
