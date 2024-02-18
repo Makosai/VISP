@@ -13,8 +13,7 @@ env:
 jobs:
   build:
 
-    runs-on:
-      labels: windows-latest-8-cores
+    runs-on: windows-latest
 
     permissions:
       contents: write
