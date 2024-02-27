@@ -25,7 +25,9 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: 1.76.0
-          target: x86_64-pc-windows-msvc
+          targets: x86_64-pc-windows-msvc,wasm32-unknown-unknown
+
+      - uses: Swatinem/rust-cache@v2
       
       - name: Install Dioxus CLI
         run: cargo install dioxus-cli
@@ -35,3 +37,15 @@ jobs:
 
       - name: Build Web
         run: dx build --bin visp_web --release
+
+      - name: Archive Desktop Production Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-dist
+          path: target-dist/desktop
+      
+      - name: Archive Web Production Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: target-dist/web
