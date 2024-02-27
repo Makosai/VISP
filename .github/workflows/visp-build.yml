@@ -49,3 +49,14 @@ jobs:
         with:
           name: web-dist
           path: target-dist/web
+
+      - name: Deploy to Vercel
+        if: "github.event_name == 'push' && endsWith(github.ref, 'refs/heads/main')" # Deploy to prod if it is a push to `main`
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-args: '--prod'
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  # Required
+          vercel-project-id: ${{ secrets.VERCEL_PROJ_ID }} # Required 
+          working-directory: ./target-dist/web
+
