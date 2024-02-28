@@ -1,3 +1,8 @@
+# Dev
+# dx serve --hot-reload --platform desktop --bin visp_desktop
+
+# dx serve --hot-reload --bin visp_web
+
 # Build Instructions
 # dx build --bin visp_desktop --release or dx bundle --bin visp_desktop --features bundle --release
 

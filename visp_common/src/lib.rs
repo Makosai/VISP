@@ -1,7 +1,14 @@
+//! VISP - main.rs
+//! Authors: Kristopher Ali (Makosai)
+//!
+//! This is the entrypoint for VISP's common code.
+
 #![allow(non_snake_case, unused)]
 
+use dioxus::html::style;
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
+
 
 // https://dioxuslabs.com/learn/0.4/router/example/full-code
 #[derive(Routable, PartialEq, Debug, Clone)]
@@ -40,9 +47,16 @@ fn Home(cx: Scope) -> Element {
     let mut count = use_state(cx, || 0);
 
     render! {
-        h1 { "Count me: {count}" }
-        button { onclick: move |_| count += 1, "Increase" }
-        button { onclick: move |_| count -= 1, "Decrease" }
+        div {
+            class: "bg-black font-black w-full h-full",
+            video {
+                width: "auto", height: "auto", autoplay: true, muted: true, src: ""
+            }
+            p { "Hello" }
+            h1 { class: "text-red font-black", "Count me 2: {count}" }
+            button { onclick: move |_| count += 1, "Increase" }
+            button { onclick: move |_| count -= 1, "Decrease" }
+        }
     }
 }
 

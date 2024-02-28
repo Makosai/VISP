@@ -23,7 +23,7 @@ watch_path = ["src", "../visp_common/src", "../visp_common/public"] # which file
 
 # include `assets` in visp_web platform
 [web.resource]
-style = ["/assets/css/tailwind.css"] # CSS style file
+style = ["/assets/css/main.css", "/assets/css/tailwind.css"] # CSS style file
 script = [] # Javascript code file
 
 [web.resource.dev]
