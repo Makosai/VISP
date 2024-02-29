@@ -6,7 +6,7 @@ pub (in crate::routes) fn Home(cx: Scope) -> Element {
 
     render! {
         div {
-            class: "bg-black font-black w-full h-full",
+            class: "bg-[--boring-gray] font-black w-full h-full",
             video {
                 width: "auto", height: "auto", autoplay: true, muted: true, src: ""
             }

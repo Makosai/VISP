@@ -8,9 +8,13 @@ html, body {
     @apply w-full h-full m-0 p-0;
 }
 
+#main {
+    @apply w-full h-full;
+}
+
 /* page.css */
 .page {
-    @apply w-full h-full flex-col;
+    @apply w-full h-full flex flex-col;
 }
 
 .slot-full {
@@ -31,4 +35,13 @@ html, body {
 
 .slot-20 {
     flex-basis: 20%;
+}
+
+.slot-10 {
+    flex-basis: 10%;
+}
+
+/* Colors & More */
+:root {
+    --boring-gray: rgb(128, 128, 128);
 }

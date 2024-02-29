@@ -12,7 +12,6 @@ use crate::routes::sound::*;
 use crate::routes::post::*;
 use crate::routes::not_found::*;
 
-
 use crate::components::nav_bar::NavBar;
 
 use dioxus::prelude::*;

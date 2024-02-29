@@ -4,18 +4,22 @@ use dioxus_router::prelude::*;
 use crate::routes::Route;
 
 #[component]
-pub fn NavBar(cx: Scope) -> Element {
+pub(crate) fn NavBar(cx: Scope) -> Element {
     render! {
-        nav {
-            ul {
-                li {
-                    Link { to: Route::Home {}, "Home" }
-                }
-                li {
-                    Link { to: Route::Video {}, "Video" }
+        div {
+            class: "page",
+            nav {
+                ul {
+                    class: "flex gap-2",
+                    li {
+                        Link { to: Route::Home {}, "Home" }
+                    }
+                    li {
+                        Link { to: Route::Video {}, "Video" }
+                    }
                 }
             }
+            Outlet::<Route> {}
         }
-        Outlet::<Route> {}
     }
 }
