@@ -25,6 +25,12 @@ pub enum Route {
     Home {},
     #[route("/video")]
     Video {},
+    #[route("/images")]
+    Images {},
+    #[route("/sound")]
+    Sound {},
+    #[route("/post")]
+    Post {},
     #[end_layout]
     //  if the current location doesn't match any of the above routes, render the NotFound component
     #[route("/:..route")]

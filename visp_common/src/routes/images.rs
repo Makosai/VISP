@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 
 #[component]
-pub (in crate::routes) fn Image(cx: Scope) -> Element {
+pub (in crate::routes) fn Images(cx: Scope) -> Element {
     render! {
         {}
     }
