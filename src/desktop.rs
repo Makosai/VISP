@@ -1,4 +1,4 @@
-//! VISP - main.rs
+//! desktop.rs
 //! Authors: Kristopher Ali (Makosai)
 //!
 //! This is the entrypoint for VISP's desktop.
@@ -6,15 +6,13 @@
 #![allow(non_snake_case)]
 #![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
 
-// VISP
-use visp_common;
+use std::fs::{self};
+use platform_dirs::AppDirs;
 
 // Dioxus
-use dioxus_desktop::{Config, LogicalSize, WindowBuilder};
-
-use std::fs::{self};
-use dioxus_desktop::tao::dpi::{PhysicalPosition};
-use platform_dirs::AppDirs;
+use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
+use dioxus::desktop::tao::dpi::PhysicalPosition;
+use dioxus::dioxus_core::Element;
 
 /// Generates some html headers.
 ///
@@ -23,19 +21,19 @@ use platform_dirs::AppDirs;
 /// This is needed because the public path changes when deployed.
 fn get_head() -> String {
     return if cfg!(debug_assertions) {
-        format!(r#"<link rel="stylesheet" type="text/css" href="{}tailwind.css">"#, "../visp_common/public/assets/css/", )
+        format!(r#"<link rel="stylesheet" type="text/css" href="{}tailwind.css">"#, "public/assets/css/")
     } else {
         format!(r#"<link rel="stylesheet" type="text/css" href="{}tailwind.css">"#, "/assets/css/")
     };
 }
 
-fn main() {
+pub(crate) fn start_app(app: fn() -> Element) {
     let app_dirs = AppDirs::new(Some("Quaint Studios/VISP"), true).unwrap();
 
     fs::create_dir_all(&app_dirs.data_dir).unwrap();
     println!("Hi! I'm Paul.");
 
-    dioxus_desktop::launch_cfg(visp_common::app, Config::default()
+    let config = Config::default()
         .with_data_directory(&app_dirs.data_dir)
         .with_resource_directory(app_dirs.data_dir)
         .with_window(
@@ -44,5 +42,7 @@ fn main() {
                 .with_inner_size(LogicalSize::new(1280, 720))
                 .with_position(PhysicalPosition::new(100, 100))
         )
-        .with_custom_head(get_head().into()))
+        .with_custom_head(get_head().into());
+
+    dioxus::prelude::LaunchBuilder::new().with_cfg(config).launch(app);
 }

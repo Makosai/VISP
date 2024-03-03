@@ -5,8 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$/hold/fullstack/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/hold/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/hold/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/visp_common/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/visp_desktop/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/visp_web/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/hold/fullstack/target" />

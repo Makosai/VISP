@@ -1,8 +1,8 @@
 use dioxus::prelude::*;
 
 #[component]
-pub(in crate::routes) fn Video(cx: Scope) -> Element {
-    render! {
+pub(in crate::routes) fn Video() -> Element {
+    rsx! {
         div {
             class: "page",
             h1 {

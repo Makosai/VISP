@@ -4,7 +4,7 @@ use dioxus_router::prelude::*;
 use crate::routes::Route;
 
 #[component]
-pub(crate) fn NavBar(cx: Scope) -> Element {
+pub(crate) fn NavBar() -> Element {
     render! {
         div {
             class: "page",
