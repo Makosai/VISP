@@ -7,6 +7,9 @@
 # dx serve --hot-reload --platform web --features-web
 
 # Build Instructions
+# dx bundle --platform desktop --features="desktop" --release --verbose
+# dx build --platform web --features="web" --release
+
 # dx build --bin visp_desktop --release or dx bundle --bin visp_desktop --features bundle --release
 
 # dx build --bin visp_web --release or dx serve --bin visp_web --release

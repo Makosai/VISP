@@ -12,7 +12,6 @@ env:
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     permissions:
@@ -27,16 +26,17 @@ jobs:
           toolchain: 1.76.0
           targets: x86_64-pc-windows-msvc,wasm32-unknown-unknown
 
+      - uses: cargo-bins/cargo-binstall@main
       - uses: Swatinem/rust-cache@v2
       
       - name: Install Dioxus CLI
-        run: cargo install dioxus-cli
+        run: cargo binstall --no-confirm dioxus-cli --force
 
       - name: Build and Bundle Desktop
-        run: dx bundle --bin visp_desktop --features bundle --release      
+        run: dx bundle --platform desktop --features="desktop" --release
 
       - name: Build Web
-        run: dx build --bin visp_web --release
+        run: dx build --platform web --features="web" --release
 
       - name: Archive Desktop Production Artifacts
         uses: actions/upload-artifact@v4

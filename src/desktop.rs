@@ -3,9 +3,6 @@
 //!
 //! This is the entrypoint for VISP's desktop.
 
-#![allow(non_snake_case)]
-#![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
-
 use std::fs::{self};
 use platform_dirs::AppDirs;
 
