@@ -1,0 +1,62 @@
+name: VISP Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Get rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.76.0
+          targets: x86_64-pc-windows-msvc,wasm32-unknown-unknown
+
+      - uses: Swatinem/rust-cache@v2
+      
+      - name: Install Dioxus CLI
+        run: cargo install dioxus-cli
+
+      - name: Build and Bundle Desktop
+        run: dx bundle --bin visp_desktop --features bundle --release      
+
+      - name: Build Web
+        run: dx build --bin visp_web --release
+
+      - name: Archive Desktop Production Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-dist
+          path: target-dist/desktop
+      
+      - name: Archive Web Production Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: target-dist/web
+
+      - name: Deploy to Vercel
+        if: "github.event_name == 'push' && endsWith(github.ref, 'refs/heads/main')" # Deploy to prod if it is a push to `main`
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-args: '--prod'
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  # Required
+          vercel-project-id: ${{ secrets.VERCEL_PROJ_ID }} # Required 
+          working-directory: ./target-dist/web
+
