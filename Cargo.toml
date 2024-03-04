@@ -2,17 +2,12 @@
 # npx tailwindcss --config ./tailwind.config.js -i ./input.css -o ./public/assets/css/tailwind.css --minify --watch
 
 # Dev
-# dx serve --hot-reload --platform desktop --features=desktop
-
-# dx serve --hot-reload --platform web --features-web
+# dx serve --hot-reload --platform desktop
+# dx serve --hot-reload --platform web
 
 # Build Instructions
-# dx bundle --platform desktop --features="desktop" --release --verbose
-# dx build --platform web --features="web" --release
-
-# dx build --bin visp_desktop --release or dx bundle --bin visp_desktop --features bundle --release
-
-# dx build --bin visp_web --release or dx serve --bin visp_web --release
+# dx bundle --platform desktop --release --verbose
+# dx build --platform web --release
 
 [package]
 name = "visp"
@@ -34,14 +29,11 @@ Video. Images. Sound. Post. VISP is an open source multimedia editor built entir
 """
 
 [dependencies]
-dioxus = { version = "0.5.0-alpha.0" }
 dioxus-router = { version = "0.5.0-alpha.0" }
-manganis = { version = "0.1.1" }
 
-[target.'cfg(windows)'.dependencies]
+[target.'cfg(target_family = "windows")'.dependencies]
+dioxus = { version = "0.5.0-alpha.0", features = ["desktop"] }
 platform-dirs = "0.3.0"
 
-[features]
-default = []
-desktop = ["dioxus/desktop"]
-web = ["dioxus/web"]
+[target.'cfg(target_family = "wasm")'.dependencies]
+dioxus = { version = "0.5.0-alpha.0", features = ["web"] }

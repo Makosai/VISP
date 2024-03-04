@@ -3,7 +3,7 @@
 //!
 //! This is the entrypoint for VISP's common code.
 
-#![allow(non_snake_case, unused)]
+#![allow(non_snake_case)]
 #![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
 
 // Modules
@@ -19,10 +19,7 @@ use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 
 // Imports
-use manganis::mg;
 use routes::Route;
-
-const _STYLE: &str = mg!(file("public/assets/css/tailwind.css"));
 
 fn main() {
     core::start_app(app);
@@ -30,6 +27,7 @@ fn main() {
 
 fn app() -> Element {
     rsx!(
+        style { {include_str!("../public/assets/css/tailwind.css")} }
         Router::<Route> { }
     )
 }

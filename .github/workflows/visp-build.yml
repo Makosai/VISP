@@ -33,22 +33,27 @@ jobs:
         run: cargo binstall --no-confirm dioxus-cli --force
 
       - name: Build and Bundle Desktop
-        run: dx bundle --platform desktop --features="desktop" --release
+        run: dx bundle --platform desktop --release --verbose
 
       - name: Build Web
-        run: dx build --platform web --features="web" --release
+        run: dx build --platform web --release
 
       - name: Archive Desktop Production Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: desktop-dist
-          path: target-dist/desktop
+          path: |
+            dist/bundle/
+            dist/visp.exe
+            
       
       - name: Archive Web Production Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: web-dist
-          path: target-dist/web
+          path: |
+            dist/assets/
+            dist/index.html
 
       - name: Deploy to Vercel
         if: "github.event_name == 'push' && endsWith(github.ref, 'refs/heads/main')" # Deploy to prod if it is a push to `main`
@@ -58,5 +63,5 @@ jobs:
           vercel-args: '--prod'
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  # Required
           vercel-project-id: ${{ secrets.VERCEL_PROJ_ID }} # Required 
-          working-directory: ./target-dist/web
+          working-directory: ./dist
 

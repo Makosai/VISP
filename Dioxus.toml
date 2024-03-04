@@ -23,7 +23,7 @@ watch_path = ["src", "public"] # which files or dirs will be watcher monitoring
 
 # include `assets` in visp_web platform
 [web.resource]
-style = ["/assets/css/main.css", "/assets/css/tailwind.css"] # CSS style file
+style = ["/assets/css/tailwind.css"] # CSS style file
 script = [] # Javascript code file
 
 [web.resource.dev]

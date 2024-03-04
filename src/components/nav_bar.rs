@@ -5,7 +5,7 @@ use crate::routes::Route;
 
 #[component]
 pub(crate) fn NavBar() -> Element {
-    render! {
+    rsx! {
         div {
             class: "page",
             nav {
