@@ -1,36 +1,59 @@
-use dioxus::html::HasFileData;
+use std::sync::Arc;
+use dioxus::html::{FileEngine, HasFileData};
 use dioxus::prelude::*;
+
+#[cfg(target_family = "windows")]
+use dioxus::desktop::use_asset_handler;
+#[cfg(target_family = "windows")]
+use dioxus::desktop::wry::http::Response;
+
+#[cfg(target_family = "wasm")]
+use dioxus::web::WebFileEngineExt;
+
+#[cfg(target_family = "windows")]
+async fn get_url(engine: Arc<dyn FileEngine>, file_name: &str) -> String {
+    let file = engine.read_file(file_name).await.unwrap();
+
+    // Use asset handler
+    use_asset_handler("testing.mp4", move |request, response| {
+        // We get the original path - make sure you handle that!
+        if request.uri().path() != "/testing.mp4" {
+            println!("{}", request.uri().path());
+            return;
+        }
+
+        response.respond(Response::new(file.clone()));
+    });
+
+    return file_name.to_string();
+}
+
+#[cfg(target_family = "wasm")]
+async fn get_url(engine: std::sync::Arc<dyn FileEngine>, file_name: &str) -> String {
+    let file = engine.get_web_file(&*file_name).await.unwrap();
+    return web_sys::Url::create_object_url_with_blob(&*file).unwrap();
+}
+
 
 #[component]
 pub(in crate::routes) fn Sound() -> Element {
     let mut enable_directory_upload = use_signal(|| false);
-    let mut file_names_uploaded = use_signal(|| Vec::new());
-    let mut files_uploaded = use_signal(|| Vec::new());
     let mut files_uploaded_url = use_signal(|| Vec::new());
 
     let upload_files = move |evt: FormEvent| async move {
         for file_name in evt.files().unwrap().files() {
             // no files on form inputs?
             // sleep(std::time::Duration::from_secs(1)).await;
-            // When uploaded, read the video file's contents
-            if let Some(file) = evt.files().unwrap().read_file_to_string(&*file_name).await {
-                // Convert file string to JSValue
-                let js_value = web_sys::wasm_bindgen::JsValue::from_str(&file);
 
-                // Create a File with u8_array_sequence data
-                let blob_file = web_sys::File::new_with_str_sequence_and_options(
-                    &js_value,
-                    &file_name,
-                    web_sys::FilePropertyBag::new().type_("video/mp4"),
-                ).unwrap();
+            #[cfg(target_family = "windows")]
+            let object_url = get_url(evt.files().unwrap(), &*file_name).await;
 
-                // Create an Object URL for the video file
-                let object_url = web_sys::Url::create_object_url_with_blob(&*blob_file).unwrap();
 
-                // Push the object URL to the files_uploaded_url signal
-                files_uploaded_url.write().push(object_url);
-            }
-            file_names_uploaded.write().push(file_name);
+            #[cfg(target_family = "wasm")]
+                let object_url = get_url(evt.files().unwrap(), &*file_name).await;
+
+            // Push the object URL to the files_uploaded_url signal
+            files_uploaded_url.write().push(object_url);
         }
     };
 
@@ -38,9 +61,10 @@ pub(in crate::routes) fn Sound() -> Element {
         if let Some(file_engine) = &evt.files() {
             let files = file_engine.files();
             for file_name in &files {
-                if let Some(file) = file_engine.read_file_to_string(file_name).await {
-                    files_uploaded.write().push(file);
-                }
+                let object_url = get_url(evt.files().unwrap(), file_name).await;
+
+                // Push the object URL to the files_uploaded_url signal
+                files_uploaded_url.write().push(object_url);
             }
         }
     };
@@ -81,9 +105,10 @@ pub(in crate::routes) fn Sound() -> Element {
             for object_url in files_uploaded_url.read().iter() {
                 li {
                     // Video Element with object URL source
+                    "hello"
                     video {
-                        controls: true,
-                        src: "{object_url}",
+                        controls: false,
+                        src: "/{object_url}",
                         "Your browser does not support the video element."
                     }
                 }
