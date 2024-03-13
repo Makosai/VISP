@@ -1,31 +1,42 @@
+# Generate Tailwind
+# npx tailwindcss --config ./tailwind.config.js -i ./input.css -o ./public/assets/css/tailwind.css --minify --watch
+
+# Dev
+# dx serve --hot-reload --platform desktop
+# dx serve --hot-reload --platform web
+
 # Build Instructions
-# dx build --bin visp_desktop --release or dx bundle --bin visp_desktop --features bundle --release
+# dx bundle --platform desktop --release --verbose
+# dx build --platform web --release
 
-# dx build --bin visp_web --release or dx serve --bin visp_web --release
-
-[workspace]
-members = ["visp_common", "visp_desktop", "visp_web"]
-default-members = ["visp_desktop", "visp_web"]
-resolver = "2"
-
-[workspace.package]
-# name = "visp"
-version = "0.1.0"
+[package]
+name = "visp"
+version = "0.1.1"
 edition = "2021"
 authors = ["Kristopher Ali <kristopher.ali.dev+visp@gmail.com>"]
 description = "Video. Images. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!"
+resolver = "2"
 
-[workspace.dependencies]
-dioxus = { version = "0.4.3" }
-dioxus-router = { version = "0.4.3" }
-dioxus-web = { version = "0.4.3" }
-dioxus-desktop = { version = "0.4.3" }
+[package.metadata.bundle]
+name = "VISP"
+identifier = "io.kristech.visp"
+version = "0.1.0"
+copyright = "MIT License Copyright (c) 2023-2024 Quaint Studios. All rights reserved."
+category = "Multimedia"
+short_description = "Video. Image. Sound. Post. A versatile tool."
+long_description = """
+Video. Images. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!
+"""
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+dioxus-router = { version = "0.5.0-alpha.0" }
+gstreamer = "0.22.2"
+gstreamer-app = "0.22.0"
+web-sys = { version = "0.3.68", features = ["Blob", "FilePropertyBag", "Url", "File"] }
 
-# Web
-# dx build --features visp_web --release
-# cargo run --features ssr --release
+[target.'cfg(target_family = "windows")'.dependencies]
+dioxus = { version = "0.5.0-alpha.0", features = ["desktop"] }
+platform-dirs = "0.3.0"
 
-# Desktop
-# dx serve --hot-reload --platform visp_desktop
+[target.'cfg(target_family = "wasm")'.dependencies]
+dioxus = { version = "0.5.0-alpha.0", features = ["web"] }
