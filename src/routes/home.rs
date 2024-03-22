@@ -5,6 +5,10 @@ pub (in crate::routes) fn Home() -> Element {
     let mut count = use_signal(|| 0);
 
     rsx! {
+        h1 {
+            class: "font-black text-2xl",
+            "Home"
+        }
         div {
             class: "bg-[--boring-gray] font-black w-full h-full",
             video {
