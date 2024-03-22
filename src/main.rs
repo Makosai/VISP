@@ -10,6 +10,9 @@
 mod routes;
 mod components;
 
+#[path = "modules/video/mod.rs"]
+mod video;
+
 #[cfg_attr(target_family = "windows", path = "desktop.rs")]
 #[cfg_attr(target_family = "wasm", path = "web.rs")]
 mod core;
