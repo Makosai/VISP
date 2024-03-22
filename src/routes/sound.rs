@@ -14,10 +14,6 @@ pub(in crate::routes) fn Sound() -> Element {
             // no files on form inputs?
             // sleep(std::time::Duration::from_secs(1)).await;
 
-            #[cfg(target_family = "windows")]
-            let video_file = get_video_file(evt.files().unwrap(), &*file_name).await;
-
-            #[cfg(target_family = "wasm")]
             let video_file = get_video_file(evt.files().unwrap(), &*file_name).await;
 
             // Push the object URL to the files_uploaded_url signal
@@ -75,7 +71,7 @@ pub(in crate::routes) fn Sound() -> Element {
                     "hello"
                     video {
                         controls: true,
-                        src: "/{video_file.object_url}",
+                        src: "{video_file.object_url}",
                         "Your browser does not support the video element."
                     }
                 }
