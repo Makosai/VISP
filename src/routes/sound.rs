@@ -18,6 +18,7 @@ use dioxus::web::WebFileEngineExt;
 #[cfg(target_family = "windows")]
 async fn get_video_file(engine: Arc<dyn FileEngine>, file_name: &str) -> VideoFile {
     let file = engine.read_file(file_name).await.unwrap();
+    let file_clone = file.clone();
 
     // Use asset handler
     use_asset_handler("testing.mp4", move |request, response| {
@@ -27,7 +28,7 @@ async fn get_video_file(engine: Arc<dyn FileEngine>, file_name: &str) -> VideoFi
             return;
         }
 
-        response.respond(Response::new(file.clone()));
+        response.respond(Response::new(file_clone.to_owned()));
     });
 
     return VideoFile::new(file_name.to_string(), file_name.to_string(), 8 * 1_000_000_000, file);
@@ -56,8 +57,9 @@ impl VideoFile {
     }
 }
 
+/*
 fn cut_video_gstreamer(input_bytes: Vec<u8>, duration: i64, output_bytes: &mut Vec<u8>) -> Result<(), gstreamer::FlowError> {
-    gst::init()?;
+    gst::init().unwrap();
 
     // Now we can calculate half_duration
     let half_duration = duration / 2;
@@ -65,13 +67,13 @@ fn cut_video_gstreamer(input_bytes: Vec<u8>, duration: i64, output_bytes: &mut V
     let pipeline = gst::Pipeline::with_name("video_cutter");
 
     // Create elements
-    let appsrc = gst_app::AppSrc::new(Some("source")).unwrap();
-    let capsfilter = gst::ElementFactory::make("capsfilter").unwrap();
-    let videocut = gst::ElementFactory::make("videocut").unwrap();
+    let appsrc = gst_app::AppSrc::builder().name("appsrc").build().context("Failed to create appsrc");
+    let capsfilter = gst::ElementFactory::make("capsfilter", None).context("Failed to create capsfilter")?;
+    let videocut = gst::ElementFactory::make("videocut").context("Failed to create videocut")?;
 
     // Consider using filesink instead of autovideosink for testing
-    let sink = gst::ElementFactory::make("filesink").unwrap();
-    sink.set_property("location", &"output.mp4").unwrap(); // Adjust output file name
+    let sink = gst::ElementFactory::make("filesink");
+    sink.set_property("location", &"output.mp4"); // Adjust output file name
 
     // Set up capsfilter (adjust for your video format)
     let caps_str = "video/x-raw,format=RGB,width=640,height=480,framerate=30/1";
@@ -116,7 +118,9 @@ fn cut_video_gstreamer(input_bytes: Vec<u8>, duration: i64, output_bytes: &mut V
     // read the output a Vec<u8>
 
     Ok(())
+
 }
+*/
 
 #[component]
 pub(in crate::routes) fn Sound() -> Element {
