@@ -30,7 +30,11 @@ fn main() {
 
 fn app() -> Element {
     rsx!(
-        style { {include_str!("../public/assets/css/tailwind.css")} }
+        style {
+            {include_str!("../public/assets/css/tailwind.css")}
+            {include_str!("../public/assets/fontawesome/css/fontawesome.min.css")}
+            {include_str!("../public/assets/fontawesome/css/solid.min.css")}
+        }
         Router::<Route> { }
     )
 }

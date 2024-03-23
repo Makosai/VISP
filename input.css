@@ -5,7 +5,7 @@
 
 /* input.css */
 html, body {
-    @apply w-full h-full m-0 p-0;
+    @apply w-full h-full m-0 p-0 bg-[--blue-gray] text-white;
 }
 
 #main {
@@ -43,5 +43,35 @@ html, body {
 
 /* Colors & More */
 :root {
+    --black: #282834;
+    --blue: #76B3CD;
+    --gray: #CDC1C1;
+
+    --blue-gray: #2D2E39;
+
+
+    --visp-blue: #182F7A;
+
     --boring-gray: rgb(128, 128, 128);
+}
+
+/* Core */
+.sidebar {
+    @apply w-64 ml-10 mt-4 h-full bg-[--black] text-white fixed top-0 left-0 overflow-x-hidden p-10 rounded-t-3xl;
+}
+.sidebar nav {
+    @apply mt-12;
+}
+.sidebar nav ul li a {
+    @apply flex gap-6 items-center py-4;
+}
+.sidebar nav ul li {
+    @apply text-[--gray];
+}
+.sidebar nav ul li.selected {
+    @apply text-white;
+}
+
+.main {
+    @apply ml-[296px] pt-4 px-10 pb-8;
 }

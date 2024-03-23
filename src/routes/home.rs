@@ -1,23 +1,36 @@
 use dioxus::prelude::*;
 
 #[component]
-pub (in crate::routes) fn Home() -> Element {
-    let mut count = use_signal(|| 0);
+pub(in crate::routes) fn Home() -> Element {
+    let username = use_signal(|| "Kristopher");
 
     rsx! {
-        h1 {
-            class: "font-black text-2xl",
-            "Home"
-        }
         div {
-            class: "bg-[--boring-gray] font-black w-full h-full",
-            video {
-                width: "auto", height: "auto", autoplay: true, muted: true, src: ""
+            class: "w-full h-full",
+            div {
+                class: "flex gap-4 items-center mt-4",
+                div {
+                    p {
+                        class: "text-3xl",
+                        "Hello "
+                        strong {
+                            "{username}! 🎉"
+                        }
+                    }
+                }
+                // Search box with rounded border and search icon embedded in it
+                div {
+                    class: "flex items-center gap-2 relative inline-block",
+                    input {
+                        class: "rounded-3xl py-4 pl-14 pr-4 absolute bg-[--black] placeholder-[--gray]",
+                        r#type: "text",
+                        placeholder: "Search...  CTRL+F",
+                    }
+                    i {
+                        class: "fa-solid fa-magnifying-glass z-10 pl-6 text-[--gray]"
+                    }
+                }
             }
-            p { "Hello" }
-            h1 { class: "text-red font-black", "Count me 2: {count}" }
-            button { onclick: move |_| count += 1, "Increase" }
-            button { onclick: move |_| count -= 1, "Decrease" }
         }
     }
 }
