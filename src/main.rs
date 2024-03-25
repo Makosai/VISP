@@ -10,6 +10,9 @@
 mod routes;
 mod components;
 
+#[path = "modules/video/mod.rs"]
+mod video;
+
 #[cfg_attr(target_family = "windows", path = "desktop.rs")]
 #[cfg_attr(target_family = "wasm", path = "web.rs")]
 mod core;
@@ -27,7 +30,11 @@ fn main() {
 
 fn app() -> Element {
     rsx!(
-        style { {include_str!("../public/assets/css/tailwind.css")} }
+        style {
+            {include_str!("../public/assets/css/tailwind.css")}
+            {include_str!("../public/assets/fontawesome/css/fontawesome.min.css")}
+            {include_str!("../public/assets/fontawesome/css/solid.min.css")}
+        }
         Router::<Route> { }
     )
 }
