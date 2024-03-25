@@ -1,13 +1,13 @@
 mod home;
 mod video;
-mod images;
+mod image;
 mod sound;
 mod post;
 mod not_found;
 
 use crate::routes::home::*;
 use crate::routes::video::*;
-use crate::routes::images::*;
+use crate::routes::image::*;
 use crate::routes::sound::*;
 use crate::routes::post::*;
 use crate::routes::not_found::*;
@@ -24,8 +24,8 @@ pub enum Route {
     Home {},
     #[route("/video")]
     Video {},
-    #[route("/images")]
-    Images {},
+    #[route("/image")]
+    Image {},
     #[route("/sound")]
     Sound {},
     #[route("/post")]

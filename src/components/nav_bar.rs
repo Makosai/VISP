@@ -52,6 +52,7 @@ pub(crate) fn NavBar() -> Element {
 
     rsx! {
         div {
+            class: "h-full",
             div {
                 class: "sidebar",
                 div {
@@ -86,11 +87,11 @@ pub(crate) fn NavBar() -> Element {
                             }
                         }
                         li {
-                            class: if selected == "Images" { "selected" } else { "" },
+                            class: if selected == "Image" { "selected" } else { "" },
                             Link {
-                                to: Route::Images {},
-                                onclick: move |_| selected.set("Images"),
-                                i { class: "fa-solid fa-image" } "Images"
+                                to: Route::Image {},
+                                onclick: move |_| selected.set("Image"),
+                                i { class: "fa-solid fa-image" } "Image"
                             }
                         }
                         li {
