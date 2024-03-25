@@ -30,22 +30,10 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       
       - name: Install Dioxus CLI
-        run: cargo binstall --no-confirm dioxus-cli --force
-
-      - name: Build and Bundle Desktop
-        run: dx bundle --platform desktop --release --verbose
+        run: cargo binstall --no-confirm dioxus-cli@0.5.0-alpha.2 --force
 
       - name: Build Web
-        run: dx build --platform web --release
-
-      - name: Archive Desktop Production Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: desktop-dist
-          path: |
-            dist/bundle/
-            dist/visp.exe
-            
+        run: dx build --platform web --release            
       
       - name: Archive Web Production Artifacts
         uses: actions/upload-artifact@v4
@@ -65,3 +53,13 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJ_ID }} # Required 
           working-directory: ./dist
 
+      - name: Build and Bundle Desktop
+        run: dx bundle --platform desktop --release
+
+      - name: Archive Desktop Production Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-dist
+          path: |
+            dist/bundle/
+            dist/visp.exe
