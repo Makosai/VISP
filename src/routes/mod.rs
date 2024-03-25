@@ -15,7 +15,6 @@ use crate::routes::not_found::*;
 use crate::components::nav_bar::NavBar;
 
 use dioxus::prelude::*;
-use dioxus_router::prelude::*;
 
 // https://dioxuslabs.com/learn/0.4/router/example/full-code
 #[derive(Routable, PartialEq, Debug, Clone)]
