@@ -1,13 +1,13 @@
 mod home;
 mod video;
-mod images;
+mod image;
 mod sound;
 mod post;
 mod not_found;
 
 use crate::routes::home::*;
 use crate::routes::video::*;
-use crate::routes::images::*;
+use crate::routes::image::*;
 use crate::routes::sound::*;
 use crate::routes::post::*;
 use crate::routes::not_found::*;
@@ -15,7 +15,6 @@ use crate::routes::not_found::*;
 use crate::components::nav_bar::NavBar;
 
 use dioxus::prelude::*;
-use dioxus_router::prelude::*;
 
 // https://dioxuslabs.com/learn/0.4/router/example/full-code
 #[derive(Routable, PartialEq, Debug, Clone)]
@@ -25,8 +24,8 @@ pub enum Route {
     Home {},
     #[route("/video")]
     Video {},
-    #[route("/images")]
-    Images {},
+    #[route("/image")]
+    Image {},
     #[route("/sound")]
     Sound {},
     #[route("/post")]

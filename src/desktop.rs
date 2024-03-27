@@ -22,7 +22,7 @@ pub(crate) fn start_app(app: fn() -> Element) {
         .with_resource_directory(app_dirs.data_dir)
         .with_window(
             WindowBuilder::new()
-                .with_title("VISP - Video. Images. Sound. Post.")
+                .with_title("VISP - Video. Image. Sound. Post.")
                 .with_inner_size(LogicalSize::new(1280, 720))
                 .with_position(PhysicalPosition::new(100, 100))
         );

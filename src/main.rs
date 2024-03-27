@@ -19,7 +19,6 @@ mod core;
 
 // Dioxus
 use dioxus::prelude::*;
-use dioxus_router::prelude::*;
 
 // Imports
 use routes::Route;

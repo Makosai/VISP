@@ -15,7 +15,7 @@ Try out VISP: https://visp.vercel.app
 
 **Potential AI Features:** The video section could have AI features that can automatically detect and remove background noise, objects, people, and even music.
 
-## Images
+## Image
 **Core functionality:** Image editing, filters, effects, color correction, basic manipulation (cropping, resizing), and more.
 
 **Description:** The image section is made to be simple and easy to use for basic image editing tasks. And to also allow you to use images from the video projects you've made and even include images in your video projects too.
