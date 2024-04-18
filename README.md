@@ -1,5 +1,5 @@
 # VISP
-> Video. Images. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!
+> Video. Image. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!
 
 ## Try it out
 Try out VISP: https://visp.vercel.app
