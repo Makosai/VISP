@@ -71,7 +71,7 @@ pub(crate) fn NavBar() -> Element {
                         class: "flex flex-col gap-2 justify-center",
                         li {
                             // class is set to "selected" if the button was pressed last
-                            class: if selected == "Home" { "selected" } else { "" },
+                            class: if selected().eq("Home") { "selected" } else { "" },
                             Link {
                                 to: Route::Home {},
                                 onclick: move |_| selected.set("Home"),
@@ -79,7 +79,7 @@ pub(crate) fn NavBar() -> Element {
                             }
                         }
                         li {
-                            class: if selected == "Video" { "selected" } else { "" },
+                            class: if selected().eq("Video") { "selected" } else { "" },
                             Link {
                                 to: Route::Video {},
                                 onclick: move |_| selected.set("Video"),
@@ -87,7 +87,7 @@ pub(crate) fn NavBar() -> Element {
                             }
                         }
                         li {
-                            class: if selected == "Image" { "selected" } else { "" },
+                            class: if selected().eq("Image") { "selected" } else { "" },
                             Link {
                                 to: Route::Image {},
                                 onclick: move |_| selected.set("Image"),
@@ -95,7 +95,7 @@ pub(crate) fn NavBar() -> Element {
                             }
                         }
                         li {
-                            class: if selected == "Sound" { "selected" } else { "" },
+                            class: if selected().eq("Sound") { "selected" } else { "" },
                             Link {
                                 to: Route::Sound {},
                                 onclick: move |_| selected.set("Sound"),
@@ -103,7 +103,7 @@ pub(crate) fn NavBar() -> Element {
                             }
                         }
                         li {
-                            class: if selected == "Post" { "selected" } else { "" },
+                            class: if selected().eq("Post") { "selected" } else { "" },
                             Link {
                                 to: Route::Post {},
                                 onclick: move |_| selected.set("Post"),

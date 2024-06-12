@@ -11,7 +11,7 @@
 
 [package]
 name = "visp"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["Kristopher Ali <kristopher.ali.dev+visp@gmail.com>"]
 description = "Video. Image. Sound. Post. VISP is an open source multimedia editor built entirely using Rust. It works on all Desktop and Mobile platforms. And you can integrate it with your favorite social media sites like YouTube and Instagram!"
@@ -20,7 +20,7 @@ resolver = "2"
 [package.metadata.bundle]
 name = "VISP"
 identifier = "io.kristech.visp"
-version = "0.1.0"
+version = "0.1.3"
 copyright = "MIT License Copyright (c) 2023-2024 Quaint Studios. All rights reserved."
 category = "Multimedia"
 short_description = "Video. Image. Sound. Post. A versatile tool."
@@ -30,13 +30,13 @@ Video. Image. Sound. Post. VISP is an open source multimedia editor built entire
 
 [dependencies]
 manganis = "0.2.2"
-web-sys = { version = "0.3.68", features = ["Blob", "FilePropertyBag", "Url", "File"] }
+web-sys = { version = "0.3.69", features = ["Blob", "FilePropertyBag", "Url", "File"] }
 
 [target.'cfg(target_family = "windows")'.dependencies]
-dioxus = { version = "0.5.0-alpha.2", features = ["desktop", "router"] }
+dioxus = { version = "0.5.1", features = ["desktop", "router"] }
 platform-dirs = "0.3.0"
-gstreamer = "0.22.2"
+gstreamer = "0.22.5"
 gstreamer-app = "0.22.0"
 
 [target.'cfg(target_family = "wasm")'.dependencies]
-dioxus = { version = "0.5.0-alpha.2", features = ["web", "router"] }
+dioxus = { version = "0.5.1", features = ["web", "router"] }
