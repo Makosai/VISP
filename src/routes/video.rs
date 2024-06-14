@@ -88,7 +88,7 @@ pub(in crate::routes) fn Video() -> Element {
                                     p { "{video_file.file_name}" }
                                     video {
                                         controls: true,
-                                        src: "{video_file.object_url}",
+                                        src: "/testing.mp4",
                                         "Your browser does not support the video element."
                                     }
                                 }

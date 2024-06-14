@@ -37,6 +37,7 @@ dioxus = { version = "0.5.1", features = ["desktop", "router"] }
 platform-dirs = "0.3.0"
 gstreamer = "0.22.5"
 gstreamer-app = "0.22.0"
+gstreamer-video = "0.22.5"
 
 [target.'cfg(target_family = "wasm")'.dependencies]
 dioxus = { version = "0.5.1", features = ["web", "router"] }
