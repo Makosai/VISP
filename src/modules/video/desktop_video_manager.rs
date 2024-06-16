@@ -25,7 +25,6 @@ pub(crate) async fn get_video_file(engine: Arc<dyn FileEngine>, file_name: &str)
 use gstreamer as gst;
 use gstreamer::prelude::*;
 use gstreamer_app as gst_app;
-use gstreamer_video as gst_video;
 use std::sync::Mutex;
 use std::time::Duration;
 
@@ -40,24 +39,31 @@ fn trim_video_data(input_data: Vec<u8>, duration: u64) -> Result<Vec<u8>, Box<dy
     let appsrc = gst_app::AppSrc::builder()
         .build();
 
-    let caps = gst_video::VideoCapsBuilder::new()
-        .width(400)
-        .height(300)
-        .framerate((15, 1).into())
-        .format(gst_video::VideoFormat::Rgb)
-        .build();
-    let capsfilter = gst::ElementFactory::make("capsfilter")
-        .property("caps", &caps)
-        .build()?;
-
+    let decodebin = gst::ElementFactory::make("decodebin").build().unwrap();
     let videoconvert = gst::ElementFactory::make("videoconvert").build().unwrap();
     let x264enc = gst::ElementFactory::make("x264enc").build().unwrap();
     let mp4mux = gst::ElementFactory::make("mp4mux").build().unwrap();
 
     let appsink = gst_app::AppSink::builder().build();
 
-    pipeline.add_many(&[appsrc.upcast_ref(), &capsfilter, &videoconvert, &x264enc, &mp4mux, &appsink.upcast_ref()]).unwrap();
-    gst::Element::link_many(&[appsrc.upcast_ref(), &capsfilter, &videoconvert, &x264enc, &mp4mux, &appsink.upcast_ref()]).unwrap();
+    pipeline.add_many(&[appsrc.upcast_ref(), &decodebin, &videoconvert, &x264enc, &mp4mux, &appsink.upcast_ref()]).unwrap();
+
+    // Link appsrc to decodebin
+    appsrc.link(&decodebin).unwrap();
+
+    // Connect a handler to the "pad-added" signal of the decodebin
+    let videoconvert_clone = videoconvert.clone();
+    decodebin.connect_pad_added(move |_dbin, src_pad| {
+        let sink_pad = videoconvert_clone.static_pad("sink").unwrap();
+        if sink_pad.is_linked() {
+            // Already linked, do nothing
+            return;
+        }
+        let _ = src_pad.link(&sink_pad);
+    });
+
+    // Link the rest of the pipeline
+    gst::Element::link_many(&[&videoconvert, &x264enc, &mp4mux, &appsink.upcast_ref()]).unwrap();
 
     let buffer = gst::Buffer::from_mut_slice(input_data);
     appsrc.push_buffer(buffer).unwrap();
