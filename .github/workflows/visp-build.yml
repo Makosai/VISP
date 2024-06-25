@@ -31,7 +31,7 @@ jobs:
 
       # Look for a fix with bundling.
       - name: Install Dioxus CLI
-        run: cargo binstall --no-confirm dioxus-cli@v0.5.4 --force
+        run: cargo binstall --no-confirm dioxus-cli@0.5.4 --force
 
       - name: Build Web
         run: dx build --platform web --release            
