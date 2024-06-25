@@ -23,7 +23,7 @@ jobs:
       - name: Get rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: 1.76.0
+          toolchain: 1.78.0
           targets: x86_64-pc-windows-msvc,wasm32-unknown-unknown
 
       - uses: cargo-bins/cargo-binstall@main
