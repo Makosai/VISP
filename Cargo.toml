@@ -35,7 +35,7 @@ web-sys = { version = "0.3.69", features = ["Blob", "FilePropertyBag", "Url", "F
 [target.'cfg(target_family = "windows")'.dependencies]
 dioxus = { version = "0.5.1", features = ["desktop", "router"] }
 platform-dirs = "0.3.0"
-gstreamer = "0.22.5"
+gstreamer = "0.23.2"
 gstreamer-app = "0.22.0"
 gstreamer-video = "0.22.5"
 
