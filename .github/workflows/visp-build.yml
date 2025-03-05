@@ -23,7 +23,7 @@ jobs:
       - name: Get rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: 1.78.0
+          toolchain: 1.85.0
           targets: x86_64-pc-windows-msvc,wasm32-unknown-unknown
 
       - uses: cargo-bins/cargo-binstall@main
@@ -31,10 +31,10 @@ jobs:
 
       # Look for a fix with bundling.
       - name: Install Dioxus CLI
-        run: cargo binstall --no-confirm dioxus-cli@0.5.4 --force
+        run: cargo binstall --no-confirm dioxus-cli@0.6.3
 
       - name: Build Web
-        run: dx build --platform web --release            
+        run: dx build --platform web --release
       
       - name: Archive Web Production Artifacts
         uses: actions/upload-artifact@v4
