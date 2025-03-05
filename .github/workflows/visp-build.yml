@@ -12,7 +12,7 @@ env:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     permissions:
       contents: write
@@ -26,20 +26,25 @@ jobs:
           toolchain: 1.85.0
           targets: x86_64-pc-windows-msvc,wasm32-unknown-unknown
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: |
-          npm --version
-          npx --version
-
       - uses: cargo-bins/cargo-binstall@main
       - uses: Swatinem/rust-cache@v2
 
       # Look for a fix with bundling.
       - name: Install Dioxus CLI
         run: cargo binstall --no-confirm dioxus-cli@0.6.3
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y libwebkit2gtk-4.1-dev \
+            build-essential \
+            curl \
+            wget \
+            file \
+            libxdo-dev \
+            libssl-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev
 
       - name: Build Web
         run: dx build --platform web --release
@@ -59,7 +64,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
           vercel-args: '--prod'
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  # Required
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Required 
+          vercel-project-id: ${{ secrets.VERCEL_PROJ_ID }} # Required 
           working-directory: ./dist
 
       - name: Build and Bundle Desktop
