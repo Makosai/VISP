@@ -10,5 +10,9 @@ module.exports = {
     theme: {
         extend: {},
     },
-    plugins: [],
+    plugins: [
+        typography,
+        forms,
+        containerQueries,
+    ],
 }

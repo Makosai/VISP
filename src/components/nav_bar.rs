@@ -38,7 +38,7 @@ pub(crate) fn Headline() -> Element {
                 "VISP"
             }
             p {
-                class: "font-thin text-sm text-[--gray]",
+                class: "font-thin text-sm text-v-gray",
                 "Video. Image. Sound. Post."
             }
         }

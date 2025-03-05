@@ -6,5 +6,5 @@
 use dioxus::prelude::*;
 
 pub(crate) fn start_app(app: fn() -> Element) {
-    launch_web(app);
+    launch(app);
 }

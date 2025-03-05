@@ -13,16 +13,14 @@
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
 
-
-# Added by cargo
-
-**/target
-
 # Project
 **/dist
 **/target-dist
 
 # Added by cargo
-
+**/target
 /target
 .vercel
+
+# Node
+node_modules

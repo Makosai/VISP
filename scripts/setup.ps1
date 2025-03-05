@@ -56,8 +56,8 @@ Switch ($choice)
     }
 
     8 {
-        Write-Host "npx tailwindcss --config ./tailwind.config.js -i ./input.css -o ./public/assets/css/tailwind.css --minify --watch"
-        npx tailwindcss build -o src/tailwind.css
+        Write-Host "npx tailwindcss --config ./tailwind.config.js -i ./input.css -o ./assets/tailwind.css --minify --watch"
+        npx tailwindcss build -o src/tailwind.css # TODO: Update command
     }
 
     9 {

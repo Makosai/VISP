@@ -3,12 +3,11 @@
 //!
 //! This is the entrypoint for VISP's common code.
 
-#![allow(non_snake_case)]
 #![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
 
 // Modules
-mod routes;
 mod components;
+mod routes;
 
 #[path = "modules/video/mod.rs"]
 mod video;
@@ -23,17 +22,25 @@ use dioxus::prelude::*;
 // Imports
 use routes::Route;
 
+const FAVICON: Asset = asset!("/assets/favicon.ico");
+const MAIN_CSS: Asset = asset!("/assets/css/main.css");
+const FONTAWESOME_CSS: Asset = asset!("/assets/fontawesome/css/fontawesome.min.css");
+const FONTAWESOME_SOLID_CSS: Asset = asset!("/assets/fontawesome/css/solid.min.css");
+const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
+
 fn main() {
     core::start_app(app);
 }
 
 fn app() -> Element {
     rsx!(
-        style {
-            {include_str!("../public/assets/css/tailwind.css")}
-            {include_str!("../public/assets/fontawesome/css/fontawesome.min.css")}
-            {include_str!("../public/assets/fontawesome/css/solid.min.css")}
-        }
+        // Global app resources
+        document::Link { rel: "icon", href: FAVICON }
+        document::Link { rel: "stylesheet", href: MAIN_CSS }
+        document::Link { rel: "stylesheet", href: FONTAWESOME_CSS }
+        document::Link { rel: "stylesheet", href: FONTAWESOME_SOLID_CSS }
+        document::Link { rel: "stylesheet", href: TAILWIND_CSS }
+
         Router::<Route> { }
     )
 }

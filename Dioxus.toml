@@ -2,7 +2,7 @@
 name = "VISP" # App (Project) Name
 default_platform = "web" # visp_desktop, web
 out_dir = "dist" # `build` & `serve` dist path
-asset_dir = "public" # resource (public) file folder
+asset_dir = "assets" # resource (assets) file folder
 
 short_description = "Video. Image. Sound. Post. A versatile tool."
 long_description = """
@@ -21,24 +21,12 @@ index_on_404 = true
 reload_html = true # when watcher trigger, regenerate the `index.html`
 watch_path = ["src"] # which files or dirs will be watcher monitoring
 
-# include `assets` in visp_web platform
-[web.resource]
-style = [
-    "./assets/css/tailwind.css",
-    "./assets/fontawesome/css/fontawesome.min.css",
-    "./assets/fontawesome/css/solid.min.css"
-] # CSS style file
-script = [] # Javascript code file
-
-[web.resource.dev]
-script = [] # Javascript code file # serve: [dev-server] only
-
-[bundler]
-identifier = "io.kristech.visp" # Bundle identifier
+[bundle]
+identifier = "com.quaintstudios.visp" # Bundle identifier
 publisher = "Quaint Studios" # Bundle publisher
 
-icon = ["icons/icon.ico"] # Bundle icon
-resources = ["public/*"] # Bundle resources
+icon = ["assets/favicon.ico"] # Bundle icon
+resources = ["assets/*"] # Bundle resources
 
-copyright = "MIT License Copyright (c) 2023-2024 Quaint Studios. All rights reserved." # Bundle copyright
+copyright = "MIT License Copyright (c) 2023-2025 Quaint Studios LLC. All rights reserved." # Bundle copyright
 category = "Multimedia" # Bundle category
