@@ -31,7 +31,7 @@ Video. Image. Sound. Post. VISP is an open source multimedia editor built entire
 [dependencies]
 web-sys = { version = "0.3.69", features = ["Blob", "FilePropertyBag", "Url", "File"] }
 
-[target.'cfg(target_family = "windows")'.dependencies]
+[target.'cfg(target_family = "windows", target_family = "unix")'.dependencies]
 dioxus = { version = "0.6.3", features = ["desktop", "router"] }
 platform-dirs = "0.3.0"
 gstreamer = "0.23.5"

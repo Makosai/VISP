@@ -1,4 +1,4 @@
-#[cfg_attr(target_family = "windows", path = "desktop_video_manager.rs")]
+#[cfg_attr(target_family = "windows", target_family = "unix", path = "desktop_video_manager.rs")]
 #[cfg_attr(target_family = "wasm", path = "web_video_manager.rs")]
 pub mod manager;
 
