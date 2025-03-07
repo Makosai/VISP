@@ -33,11 +33,12 @@ pub(in crate::routes) fn Video() -> Element {
     };
 
     rsx! {
+        document::Title { "VISP - Video. Image. Sound. Post." }
+
         div { class: "page",
-            h1 { class: "font-black text-2xl", "Video" }
             div { class: "flex slot-70 border-black border-2",
                 div { class: "slot-30",
-                    p { "30% | Info Windows" }
+                    p { "Info Windows" }
                     div {
                         input {
                             r#type: "checkbox",
@@ -71,29 +72,22 @@ pub(in crate::routes) fn Video() -> Element {
                         }
                     }
                 }
-                div { class: "slot-70",
-                    p { "70% | Video & Effects Previews" }
-                    div {
-                        ul {
-                            for video_file in video_files_uploaded.read().iter() {
-                                li {
-                                    // Video Element with object URL source
-                                    p { "{video_file.file_name}" }
-                                    video { controls: true, src: "/testing.mp4",
-                                        "Your browser does not support the video element."
-                                    }
-                                }
-                            }
+                div { class: "slot-70 border-l-solid border-black border-l-1 relative",
+                    for video_file in video_files_uploaded.read().iter() {
+                        // Video Element with object URL source
+                        video { controls: true, src: "/testing.mp4",
+                            "Your browser does not support the video element."
                         }
+                        p { class: "absolute top-0", "{video_file.file_name}" }
                     }
                 }
             }
             div { class: "flex flex-col slot-30 border-black border-2",
-                div { class: "slot-10",
-                    p { "10% | Toolbar" }
+                div { class: "slot-10 border-b-solid border-black border-b-1",
+                    p { "Toolbar" }
                 }
                 div { class: "slot-90",
-                    p { "90% | Timeline" }
+                    p { "Timeline" }
                 }
             }
         }

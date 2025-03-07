@@ -15,7 +15,7 @@ html, body {
 }
 
 #main {
-    @apply w-full h-full;
+    @apply w-full h-full overflow-hidden;
 }
 
 /* page.css */
@@ -65,5 +65,9 @@ html, body {
 }
 
 .main {
-    @apply ml-[296px] pt-4 px-10 pb-8;
+    @apply ml-[296px] h-full;
+}
+
+video {
+    @apply w-full h-full my-auto;
 }

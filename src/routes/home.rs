@@ -5,6 +5,7 @@ pub(in crate::routes) fn Home() -> Element {
     let username = use_signal(|| "User");
 
     rsx! {
+        document::Title { "VISP - Video. Image. Sound. Post." }
         div { class: "w-full h-full",
             div { class: "flex gap-4 items-center mt-1.5",
                 div {
