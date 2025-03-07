@@ -65,6 +65,9 @@ jobs:
             dist/assets/
             dist/index.html
 
+      - name: Debug
+        run: ls -la
+
       - name: Deploy to Vercel
         if: "github.event_name == 'push' && endsWith(github.ref, 'refs/heads/main')" # Deploy to prod if it is a push to `main`
         uses: amondnet/vercel-action@v25
