@@ -62,8 +62,8 @@ jobs:
         with:
           name: web-dist
           path: |
-            dist/assets/
-            dist/index.html
+            /home/runner/work/VISP/VISP/target/dx/visp/release/web/public/assets
+            /home/runner/work/VISP/VISP/target/dx/visp/release/web/public/index.html
 
       - name: Debug
         run: ls -la
@@ -76,7 +76,7 @@ jobs:
           vercel-args: '--prod'
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  # Required
           vercel-project-id: ${{ secrets.VERCEL_PROJ_ID }} # Required 
-          working-directory: ./dist
+          working-directory: /home/runner/work/VISP/VISP/target/dx/visp/release/web/public
 
       - name: Build and Bundle Desktop
         run: dx bundle --platform desktop --release
@@ -86,5 +86,5 @@ jobs:
         with:
           name: desktop-dist
           path: |
-            dist/bundle/
-            dist/visp.exe
+            /home/runner/work/VISP/VISP/target/dx/visp/release/desktop/assets/
+            /home/runner/work/VISP/VISP/target/dx/visp/release/desktop/visp.exe
