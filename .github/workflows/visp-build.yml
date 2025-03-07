@@ -46,6 +46,14 @@ jobs:
             libayatana-appindicator3-dev \
             librsvg2-dev
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          npm --version
+          npx --version
+
       - name: Build Web
         run: dx build --platform web --release
       
