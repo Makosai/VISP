@@ -1,8 +1,11 @@
+use crate::video::VideoFile;
 use dioxus::html::FileEngine;
 use dioxus::web::WebFileEngineExt;
-use crate::video::VideoFile;
 
-pub(crate) async fn get_video_file(engine: std::sync::Arc<dyn FileEngine>, file_name: &str) -> VideoFile {
+pub(crate) async fn get_video_file(
+    engine: std::sync::Arc<dyn FileEngine>,
+    file_name: &str
+) -> VideoFile {
     let web_file = engine.get_web_file(&*file_name).await.unwrap();
     let file = engine.read_file(file_name).await.unwrap();
     let object_url = web_sys::Url::create_object_url_with_blob(&*web_file).unwrap();

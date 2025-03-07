@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 
 #[component]
-pub (in crate::routes) fn NotFound(route: Vec<String>) -> Element {
+pub(in crate::routes) fn NotFound(route: Vec<String>) -> Element {
     rsx! {
         h1 { "Page not found" }
         p { "We are terribly sorry, but the page you requested doesn't exist." }

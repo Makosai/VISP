@@ -1,8 +1,8 @@
-use std::sync::Arc;
+use crate::video::VideoFile;
 use dioxus::desktop::use_asset_handler;
 use dioxus::desktop::wry::http::Response;
 use dioxus::html::FileEngine;
-use crate::video::VideoFile;
+use std::sync::Arc;
 
 pub(crate) async fn get_video_file(engine: Arc<dyn FileEngine>, file_name: &str) -> VideoFile {
     let file = engine.read_file(file_name).await.unwrap();
@@ -19,7 +19,12 @@ pub(crate) async fn get_video_file(engine: Arc<dyn FileEngine>, file_name: &str)
         response.respond(Response::new(file_clone.to_owned()));
     });
 
-    return VideoFile::new(file_name.to_string(), file_name.to_string(), Duration::new(1, 0).as_nanos() as u64, file);
+    return VideoFile::new(
+        file_name.to_string(),
+        file_name.to_string(),
+        Duration::new(1, 0).as_nanos() as u64,
+        file
+    );
 }
 
 use gstreamer as gst;
@@ -28,7 +33,10 @@ use gstreamer_app as gst_app;
 use std::sync::Mutex;
 use std::time::Duration;
 
-fn trim_video_data(input_data: Vec<u8>, duration: u64) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
+fn trim_video_data(
+    input_data: Vec<u8>,
+    duration: u64
+) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // Initialize GStreamer
     gst::init().unwrap();
 
@@ -36,8 +44,7 @@ fn trim_video_data(input_data: Vec<u8>, duration: u64) -> Result<Vec<u8>, Box<dy
     let pipeline = gst::Pipeline::with_name("video_cutter");
 
     // Create the elements
-    let appsrc = gst_app::AppSrc::builder()
-        .build();
+    let appsrc = gst_app::AppSrc::builder().build();
 
     let decodebin = gst::ElementFactory::make("decodebin").build().unwrap();
     let videoconvert = gst::ElementFactory::make("videoconvert").build().unwrap();
@@ -46,7 +53,18 @@ fn trim_video_data(input_data: Vec<u8>, duration: u64) -> Result<Vec<u8>, Box<dy
 
     let appsink = gst_app::AppSink::builder().build();
 
-    pipeline.add_many(&[appsrc.upcast_ref(), &decodebin, &videoconvert, &x264enc, &mp4mux, &appsink.upcast_ref()]).unwrap();
+    pipeline
+        .add_many(
+            &[
+                appsrc.upcast_ref(),
+                &decodebin,
+                &videoconvert,
+                &x264enc,
+                &mp4mux,
+                &appsink.upcast_ref(),
+            ]
+        )
+        .unwrap();
 
     // Link appsrc to decodebin
     appsrc.link(&decodebin).unwrap();
@@ -71,15 +89,14 @@ fn trim_video_data(input_data: Vec<u8>, duration: u64) -> Result<Vec<u8>, Box<dy
     let output_data = Arc::new(Mutex::new(Vec::new()));
     let output_data_clone = Arc::clone(&output_data);
     appsink.set_callbacks(
-        gst_app::AppSinkCallbacks::builder()
+        gst_app::AppSinkCallbacks
+            ::builder()
             .new_sample(move |appsink| {
                 let sample = appsink.pull_sample().map_err(|_| gst::FlowError::Eos)?;
                 let buffer = sample.buffer().ok_or_else(|| {
-                    gstreamer::element_error!(
-                        appsink,
-                        gst::ResourceError::Failed,
-                        ("Failed to get buffer from appsink")
-                    );
+                    gstreamer::element_error!(appsink, gst::CoreError::Failed, [
+                        "Failed to get buffer from appsink",
+                    ]);
 
                     gst::FlowError::Error
                 })?;
@@ -87,7 +104,7 @@ fn trim_video_data(input_data: Vec<u8>, duration: u64) -> Result<Vec<u8>, Box<dy
                 output_data_clone.lock().unwrap().extend_from_slice(map.as_slice());
                 Ok(gst::FlowSuccess::Ok)
             })
-            .build(),
+            .build()
     );
 
     pipeline.set_state(gst::State::Playing).unwrap();
@@ -99,7 +116,9 @@ fn trim_video_data(input_data: Vec<u8>, duration: u64) -> Result<Vec<u8>, Box<dy
     while let Some(msg) = bus.timed_pop(timeout) {
         use gst::MessageView;
         match msg.view() {
-            MessageView::Eos(..) => break,
+            MessageView::Eos(..) => {
+                break;
+            }
             MessageView::Error(err) => {
                 eprintln!(
                     "Error from {:?}: {} ({:?})",

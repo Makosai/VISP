@@ -42,6 +42,6 @@ fn app() -> Element {
         document::Link { rel: "stylesheet", href: FONTAWESOME_SOLID_CSS }
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
 
-        Router::<Route> { }
+        Router::<Route> {}
     )
 }

@@ -12,6 +12,11 @@ pub struct VideoFile {
 
 impl VideoFile {
     pub fn new(object_url: String, file_name: String, duration: u64, data: Vec<u8>) -> Self {
-        Self { object_url, file_name, duration, data }
+        Self {
+            object_url,
+            file_name,
+            duration,
+            data,
+        }
     }
 }

@@ -1,7 +1,7 @@
-use dioxus::html::HasFileData;
-use dioxus::prelude::*;
 use crate::video::manager::get_video_file;
 use crate::video::VideoFile;
+use dioxus::html::HasFileData;
+use dioxus::prelude::*;
 
 #[component]
 pub(in crate::routes) fn Video() -> Element {
@@ -33,16 +33,10 @@ pub(in crate::routes) fn Video() -> Element {
     };
 
     rsx! {
-        div {
-            class: "page",
-            h1 {
-                class: "font-black text-2xl",
-                "Video"
-            }
-            div {
-                class: "flex slot-70 border-black border-2",
-                div {
-                    class: "slot-30",
+        div { class: "page",
+            h1 { class: "font-black text-2xl", "Video" }
+            div { class: "flex slot-70 border-black border-2",
+                div { class: "slot-30",
                     p { "30% | Info Windows" }
                     div {
                         input {
@@ -50,11 +44,8 @@ pub(in crate::routes) fn Video() -> Element {
                             id: "directory-upload",
                             checked: enable_directory_upload,
                             oninput: move |evt| enable_directory_upload.set(evt.checked()),
-                        },
-                        label {
-                            r#for: "directory-upload",
-                            "Enable directory upload"
                         }
+                        label { r#for: "directory-upload", "Enable directory upload" }
 
                         input {
                             r#type: "file",
@@ -70,15 +61,17 @@ pub(in crate::routes) fn Video() -> Element {
                             "ondragleave": "this.style.backgroundColor='#FFFFFF';",
 
                             id: "drop-zone",
-                            prevent_default: "ondrop dragover dragenter",
                             ondrop: handle_file_drop,
-                            ondragover: move |event| event.stop_propagation(),
+                            ondragover: move |event| {
+                                event.prevent_default();
+                                event.stop_propagation();
+                            },
+                            ondragenter: move |event| event.prevent_default(),
                             "Drop files here"
                         }
                     }
                 }
-                div {
-                    class: "slot-70",
+                div { class: "slot-70",
                     p { "70% | Video & Effects Previews" }
                     div {
                         ul {
@@ -86,9 +79,7 @@ pub(in crate::routes) fn Video() -> Element {
                                 li {
                                     // Video Element with object URL source
                                     p { "{video_file.file_name}" }
-                                    video {
-                                        controls: true,
-                                        src: "/testing.mp4",
+                                    video { controls: true, src: "/testing.mp4",
                                         "Your browser does not support the video element."
                                     }
                                 }
@@ -97,14 +88,11 @@ pub(in crate::routes) fn Video() -> Element {
                     }
                 }
             }
-            div {
-                class: "flex flex-col slot-30 border-black border-2",
-                div {
-                    class: "slot-10",
+            div { class: "flex flex-col slot-30 border-black border-2",
+                div { class: "slot-10",
                     p { "10% | Toolbar" }
                 }
-                div {
-                    class: "slot-90",
+                div { class: "slot-90",
                     p { "90% | Timeline" }
                 }
             }

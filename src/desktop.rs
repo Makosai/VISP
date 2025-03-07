@@ -3,12 +3,12 @@
 //!
 //! This is the entrypoint for VISP's desktop.
 
-use std::fs::{self};
 use platform_dirs::AppDirs;
+use std::fs::{ self };
 
 // Dioxus
-use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
 use dioxus::desktop::tao::dpi::PhysicalPosition;
+use dioxus::desktop::{ Config, LogicalSize, WindowBuilder };
 use dioxus::dioxus_core::Element;
 
 pub(crate) fn start_app(app: fn() -> Element) {
