@@ -38,16 +38,10 @@ fn app() -> Element {
         // Global app resources
         document::Link { rel: "icon", href: FAVICON }
 
-        // document::Link { rel: "preload", href: MAIN_CSS, as: "style" }
-        // document::Link { rel: "preload", href: FONTAWESOME_CSS, as: "style" }
-        // document::Link { rel: "preload", href: FONTAWESOME_SOLID_CSS, as: "style" }
-        // document::Link { rel: "preload", href: TAILWIND_CSS, as: "style" }
-
-        document::Link { rel: "stylesheet", href: MAIN_CSS }
-        document::Link { rel: "stylesheet", href: MAIN_CSS }
-        document::Link { rel: "stylesheet", href: FONTAWESOME_CSS }
-        document::Link { rel: "stylesheet", href: FONTAWESOME_SOLID_CSS }
-        document::Link { rel: "stylesheet", href: TAILWIND_CSS }
+        document::Link { rel: "preload", href: MAIN_CSS, as: "style", onload: "this.rel='stylesheet'" }
+        document::Link { rel: "preload", href: FONTAWESOME_CSS, as: "style", onload: "this.rel='stylesheet'" }
+        document::Link { rel: "preload", href: FONTAWESOME_SOLID_CSS, as: "style", onload: "this.rel='stylesheet'" }
+        document::Link { rel: "preload", href: TAILWIND_CSS, as: "style", onload: "this.rel='stylesheet'" }
 
         Router::<Route> {}
     )
