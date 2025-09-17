@@ -19,7 +19,7 @@ resolver = "2"
 
 [package.metadata.bundle]
 name = "VISP"
-identifier = "io.kristech.visp"
+identifier = "com.quaintstudios.visp"
 version = "0.1.4"
 copyright = "MIT License Copyright (c) 2023-2025 Quaint Studios LLC. All rights reserved."
 category = "Multimedia"
@@ -29,7 +29,12 @@ Video. Image. Sound. Post. VISP is an open source multimedia editor built entire
 """
 
 [dependencies]
-web-sys = { version = "0.3.69", features = ["Blob", "FilePropertyBag", "Url", "File"] }
+web-sys = { version = "0.3.69", features = [
+	"Blob",
+	"FilePropertyBag",
+	"Url",
+	"File",
+] }
 
 [target.'cfg(target_family = "windows")'.dependencies]
 dioxus = { version = "0.7.0-alpha.1", features = ["desktop", "router"] }
