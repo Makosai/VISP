@@ -38,3 +38,10 @@ Try out VISP: https://visp.vercel.app
 **Description:** The Post section is where you can share your creations with the world. You can publish your videos, images, and soundtracks to your favorite social media sites like YouTube and Instagram. And you can even schedule posts to be published at a later time.
 
 **Potential Features:** The Post section could have a built-in social media manager, a built-in analytics tool, and a built-in scheduler.
+
+## Setup
+
+```
+npm install
+npm run tauri android init
+```
