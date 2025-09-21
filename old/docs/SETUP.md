@@ -1,5 +1,8 @@
 # Setup
 
+> THIS IS DEPRECATED AS WE MOVED TO TAURI
+
+
 Here's how to get your environment setup with the least amount of headaches.
 
 ## Rust
