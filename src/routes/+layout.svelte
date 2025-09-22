@@ -30,7 +30,6 @@
           <Button
             size="sm"
             variant="ghost"
-            class="rounded"
             onclick={() => goto(tab.href)}
             aria-label={`Go to ${tab.label} section`}>
             {tab.label}
