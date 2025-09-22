@@ -20,6 +20,7 @@
     "mode-watcher": "^1.1.0"
   },
   "devDependencies": {
+    "@internationalized/date": "^3.9.0",
     "@lucide/svelte": "^0.544.0",
     "@sveltejs/adapter-static": "^3.0.6",
     "@sveltejs/kit": "^2.9.0",
@@ -28,6 +29,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/vite": "^4.0.0",
     "@tauri-apps/cli": "^2",
+    "bits-ui": "^2.11.0",
     "clsx": "^2.1.1",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",

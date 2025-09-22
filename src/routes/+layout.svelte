@@ -5,6 +5,7 @@
   import { ModeWatcher, toggleMode } from 'mode-watcher';
   import SunIcon from '@lucide/svelte/icons/sun';
   import MoonIcon from '@lucide/svelte/icons/moon';
+  import ContextMenubar from '$lib/components/ui/visp/ContextMenubar.svelte';
 
   const navTabs = [
     { label: 'Video', href: '/video' },
@@ -20,7 +21,9 @@
 <div class="flex flex-col min-h-screen bg-background text-foreground">
   <!-- Top Bar -->
   <header class="sticky top-0 z-20 w-full border-b border-border">
-    <div class="lead"></div>
+    <div class="lead">
+      <ContextMenubar />
+    </div>
     <nav class="nav-items">
       <div class="flex gap-1">
         {#each navTabs as tab}
@@ -35,15 +38,7 @@
         {/each}
       </div>
     </nav>
-    <div class="actions">
-      <Button onclick={toggleMode} variant="outline" size="icon">
-        <SunIcon
-          class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 !transition-all dark:-rotate-90 dark:scale-0" />
-        <MoonIcon
-          class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 !transition-all dark:rotate-0 dark:scale-100" />
-        <span class="sr-only">Toggle theme</span>
-      </Button>
-    </div>
+    <div class="actions"></div>
   </header>
 
   {@render children?.()}
@@ -52,9 +47,7 @@
 <style>
   .lead {
     height: 100%;
-    width: 70px;
-    background-color: var(--foreground);
-    opacity: 0.045;
+    width: 13.125rem;
   }
   .nav-items {
     display: flex;
@@ -67,14 +60,23 @@
     align-items: center;
     justify-content: flex-end;
     gap: 0.5rem;
-    width: 70px;
+    width: 13.125rem;
   }
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     padding: 0.5rem 1rem;
     background-color: var(--background);
     height: 53px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  header::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent; /* make scrollbar transparent */
   }
 </style>
