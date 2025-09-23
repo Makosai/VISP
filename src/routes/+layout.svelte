@@ -3,9 +3,10 @@
   import { Button } from '$lib/components/ui/button';
   import { goto } from '$app/navigation';
   import { ModeWatcher, toggleMode } from 'mode-watcher';
-  import SunIcon from '@lucide/svelte/icons/sun';
-  import MoonIcon from '@lucide/svelte/icons/moon';
+  import ShareIcon from '@lucide/svelte/icons/share-2';
+  import FilmIcon from '@lucide/svelte/icons/film';
   import ContextMenubar from '$lib/components/ui/visp/ContextMenubar.svelte';
+  import * as Avatar from '$lib/components/ui/avatar';
 
   const navTabs = [
     { label: 'Video', href: '/video' },
@@ -37,7 +38,14 @@
         {/each}
       </div>
     </nav>
-    <div class="actions"></div>
+    <div class="actions">
+      <Button size="icon" variant="ghost" aria-label="Share">
+        <ShareIcon />
+      </Button>
+      <Button size="icon" variant="ghost" aria-label="Export">
+        <FilmIcon />
+      </Button>
+    </div>
   </header>
 
   {@render children?.()}
