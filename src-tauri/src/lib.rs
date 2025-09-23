@@ -65,7 +65,7 @@ fn cut_video_in_half(input_path: String, output_path: String) -> Result<String, 
     let bus = pipeline.bus().unwrap();
     loop {
         use gst::MessageView;
-        match bus.timed_pop(gst::ClockTime::from_seconds(5)) {
+        match bus.timed_pop(gst::ClockTime::from_seconds(240)) {
             Some(msg) =>
                 match msg.view() {
                     MessageView::AsyncDone(_) => {
@@ -113,7 +113,7 @@ fn cut_video_in_half(input_path: String, output_path: String) -> Result<String, 
     let mut result = Ok(());
     loop {
         use gst::MessageView;
-        match bus.timed_pop(gst::ClockTime::from_seconds(10)) {
+        match bus.timed_pop(gst::ClockTime::from_seconds(240)) {
             Some(msg) =>
                 match msg.view() {
                     MessageView::Eos(..) => {
