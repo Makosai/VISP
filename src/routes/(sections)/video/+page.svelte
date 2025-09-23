@@ -79,28 +79,25 @@
 
   footerActionsStore.set([
     {
-      type: 'link',
+      type: 'button',
       label: 'Timeline',
-      href: '/timeline',
-      disabled: false
+      onClick: () => alert('/timeline'),
+      active: true
     },
     {
-      type: 'link',
+      type: 'button',
       label: 'Audio',
-      href: '/audio',
-      disabled: false
+      onClick: () => alert('/audio')
     },
     {
-      type: 'link',
+      type: 'button',
       label: 'Color Grade',
-      href: '/color-grade',
-      disabled: false
+      onClick: () => alert('/color-grade')
     },
     {
-      type: 'link',
+      type: 'button',
       label: 'Finalize',
-      href: '/finalize',
-      disabled: false
+      onClick: () => alert('/finalize')
     }
   ]);
 </script>

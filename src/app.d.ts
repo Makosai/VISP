@@ -20,6 +20,7 @@ declare global {
 		type Action = {
 			label: string;
 			disabled?: boolean;
+			active?: boolean;
 		} & (
 				| { type: 'button'; onClick: () => void; }
 				| { type: 'link'; href: string; target?: string; }

@@ -30,7 +30,8 @@
         onclick={action.onClick}
         disabled={action.disabled}
         size="sm"
-        variant="ghost">
+        variant={action.active ? 'secondary' : 'ghost'}
+        aria-current={action.active ? 'page' : undefined}>
         {action.label}
       </Button>
     {:else if action.type === 'link'}
@@ -41,7 +42,8 @@
         rel="noopener noreferrer"
         disabled={action.disabled}
         size="sm"
-        variant="ghost">
+        variant={action.active ? 'secondary' : 'ghost'}
+        aria-current={action.active ? 'page' : undefined}>
         {action.label}
       </Button>
     {/if}
