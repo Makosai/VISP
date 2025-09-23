@@ -74,9 +74,9 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    padding: 0.5rem 1rem;
+    padding-inline: 0.75rem;
     background-color: var(--background);
-    height: 53px;
+    height: 42px;
     overflow-x: auto;
     overflow-y: hidden;
   }

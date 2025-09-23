@@ -5,6 +5,7 @@
   import { save } from '@tauri-apps/plugin-dialog';
   import { mkdir, writeFile, BaseDirectory } from '@tauri-apps/plugin-fs';
   import { join, appDataDir } from '@tauri-apps/api/path';
+  import { footerActionsStore } from '$lib';
 
   let file: File | null = null;
   let videoUrl: string | null = null;
@@ -75,6 +76,33 @@
       processing = false;
     }
   }
+
+  footerActionsStore.set([
+    {
+      type: 'link',
+      label: 'Timeline',
+      href: '/timeline',
+      disabled: false
+    },
+    {
+      type: 'link',
+      label: 'Audio',
+      href: '/audio',
+      disabled: false
+    },
+    {
+      type: 'link',
+      label: 'Color Grade',
+      href: '/color-grade',
+      disabled: false
+    },
+    {
+      type: 'link',
+      label: 'Finalize',
+      href: '/finalize',
+      disabled: false
+    }
+  ]);
 </script>
 
 <main class="container">
