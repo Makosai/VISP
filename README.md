@@ -41,7 +41,4 @@ Try out VISP: https://visp.vercel.app
 
 ## Setup
 
-```
-npm install
-npm run tauri android init
-```
+Coming soon..
