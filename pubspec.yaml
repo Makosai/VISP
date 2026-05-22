@@ -1,0 +1,27 @@
+name: visp_workspace
+description: "High-performance multimedia engine workspace"
+version: 1.0.0+1
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+workspace:
+  - apps/visp_desktop
+  - packages/visp_bridge
+  - ui_packages/visp_flutter_ui
+
+melos:
+  packages:
+    - apps/**
+    - packages/**
+    - ui_packages/**
+
+  scripts:
+    bootstrap:
+      run: melos bootstrap
+      description: "Initialize and link all workspace packages"
+
+    codegen:
+      run: dart run flutter_rust_bridge_codegen generate
+      description: "Regenerate Flutter-to-Rust FFI bindings (FRB v2)"

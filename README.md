@@ -41,4 +41,8 @@ Try out VISP: https://visp.vercel.app
 
 ## Setup
 
-Coming soon..
+https://github.com/casey/just#installation
+
+```
+just setup
+```
