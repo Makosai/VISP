@@ -12,7 +12,7 @@ setup:
 
 bootstrap:
     dart pub get
-    melos run bootstrap
+    melos run workspace-bootstrap
 
 codegen:
     melos run codegen

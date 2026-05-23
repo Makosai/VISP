@@ -4,7 +4,7 @@ version: 1.0.0+1
 publish_to: 'none'
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: ^3.12.0
 
 workspace:
   - apps/visp_desktop
@@ -18,10 +18,13 @@ melos:
     - ui_packages/**
 
   scripts:
-    bootstrap:
+    workspace-bootstrap:
       run: melos bootstrap
       description: "Initialize and link all workspace packages"
 
     codegen:
       run: dart run flutter_rust_bridge_codegen generate
       description: "Regenerate Flutter-to-Rust FFI bindings (FRB v2)"
+
+dev_dependencies:
+  melos: ^7.7.0
