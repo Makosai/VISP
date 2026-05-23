@@ -52,6 +52,30 @@ add_subdirectory(${FLUTTER_MANAGED_DIR})
 # Application build; see runner/CMakeLists.txt.
 add_subdirectory("runner")
 
+# Rust Core Integration
+set(RUST_CORE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../packages/visp_core")
+set(RUST_LIB_NAME "visp_core")
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(RUST_BUILD_MODE "debug")
+    set(RUST_BUILD_FLAG "")
+else()
+    set(RUST_BUILD_MODE "release")
+    set(RUST_BUILD_FLAG "--release")
+endif()
+
+set(RUST_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../target/${RUST_BUILD_MODE}/${RUST_LIB_NAME}.dll")
+
+add_custom_command(
+    OUTPUT "${RUST_LIB_PATH}"
+    COMMAND cargo build ${RUST_BUILD_FLAG}
+    WORKING_DIRECTORY "${RUST_CORE_DIR}"
+    COMMENT "Building Rust core..."
+    VERBATIM
+)
+
+add_custom_target(rust_core_target ALL DEPENDS "${RUST_LIB_PATH}")
+add_dependencies(${BINARY_NAME} rust_core_target)
 
 # Generated plugin build rules, which manage building the plugins and adding
 # them to the application.
@@ -79,6 +103,9 @@ install(FILES "${FLUTTER_ICU_DATA_FILE}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}
   COMPONENT Runtime)
 
 install(FILES "${FLUTTER_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
+  COMPONENT Runtime)
+
+install(FILES "${RUST_LIB_PATH}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
   COMPONENT Runtime)
 
 if(PLUGIN_BUNDLED_LIBRARIES)
