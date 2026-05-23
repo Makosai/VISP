@@ -52,35 +52,28 @@ add_subdirectory(${FLUTTER_MANAGED_DIR})
 # Application build; see runner/CMakeLists.txt.
 add_subdirectory("runner")
 
-# Rust Core Integration
-set(RUST_CORE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../packages/visp_core")
+# Rust Core Integration (Handled by Justfile, CMake only copies)
 set(RUST_LIB_NAME "visp_core")
-
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(RUST_BUILD_MODE "debug")
-    set(RUST_BUILD_FLAG "")
 else()
     set(RUST_BUILD_MODE "release")
-    set(RUST_BUILD_FLAG "--release")
 endif()
 
 set(RUST_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../target/${RUST_BUILD_MODE}/${RUST_LIB_NAME}.dll")
 
-add_custom_command(
-    OUTPUT "${RUST_LIB_PATH}"
-    COMMAND cargo build ${RUST_BUILD_FLAG}
-    WORKING_DIRECTORY "${RUST_CORE_DIR}"
-    COMMENT "Building Rust core..."
-    VERBATIM
-)
-
-add_custom_target(rust_core_target ALL DEPENDS "${RUST_LIB_PATH}")
-add_dependencies(${BINARY_NAME} rust_core_target)
+if(EXISTS "${RUST_LIB_PATH}")
+    add_custom_command(
+        TARGET ${BINARY_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${RUST_LIB_PATH}"
+        "$<TARGET_FILE_DIR:${BINARY_NAME}>/${RUST_LIB_NAME}.dll"
+    )
+endif()
 
 # Generated plugin build rules, which manage building the plugins and adding
 # them to the application.
 include(flutter/generated_plugins.cmake)
-
 
 # === Installation ===
 # Support files are copied into place next to the executable, so that it can
@@ -105,8 +98,10 @@ install(FILES "${FLUTTER_ICU_DATA_FILE}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}
 install(FILES "${FLUTTER_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
   COMPONENT Runtime)
 
-install(FILES "${RUST_LIB_PATH}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
-  COMPONENT Runtime)
+if(EXISTS "${RUST_LIB_PATH}")
+    install(FILES "${RUST_LIB_PATH}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
+      COMPONENT Runtime)
+endif()
 
 if(PLUGIN_BUNDLED_LIBRARIES)
   install(FILES "${PLUGIN_BUNDLED_LIBRARIES}"

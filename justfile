@@ -19,6 +19,7 @@ codegen:
 
 build-windows:
     just codegen
+    cd packages/visp_core && cargo build
     cd apps/visp_desktop && flutter build windows --debug
 
 run-windows:
