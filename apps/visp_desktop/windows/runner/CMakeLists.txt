@@ -38,3 +38,13 @@ target_include_directories(${BINARY_NAME} PRIVATE "${CMAKE_SOURCE_DIR}")
 
 # Run the Flutter tool portions of the build. This must not be removed.
 add_dependencies(${BINARY_NAME} flutter_assemble)
+
+# Rust Core Integration: Copy DLL to target directory after build
+add_custom_command(
+    TARGET ${BINARY_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${RUST_LIB_PATH}"
+    "$<TARGET_FILE_DIR:${BINARY_NAME}>/${RUST_LIB_NAME}.dll"
+    COMMENT "Copying Rust DLL to output directory..."
+    VERBATIM
+)
