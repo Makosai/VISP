@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   visp_bridge:
+  shadcn_ui: ^0.54.0
 
 dev_dependencies:
   flutter_test:
