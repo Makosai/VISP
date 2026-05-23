@@ -33,6 +33,12 @@ run target="windows":
 test-core:
     cd packages/visp_core && cargo test
 
+run-flutter target="windows":
+    cd apps/visp_desktop && flutter run -d {{target}}
+
+check-dart:
+    melos exec -- flutter analyze
+
 clean:
     cd apps/visp_desktop && flutter clean
     cd packages/visp_core && cargo clean
