@@ -1,0 +1,4 @@
+# flutter_rust_bridge configuration for VISP
+rust_input: crate::api
+rust_root: packages/visp_core
+dart_output: packages/visp_bridge/lib/src/generated

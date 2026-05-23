@@ -23,7 +23,7 @@ melos:
       description: "Initialize and link all workspace packages"
 
     codegen:
-      run: dart run flutter_rust_bridge_codegen generate
+      run: flutter_rust_bridge_codegen generate
       description: "Regenerate Flutter-to-Rust FFI bindings (FRB v2)"
 
 dev_dependencies:
