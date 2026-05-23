@@ -32,3 +32,8 @@ run target="windows":
 
 test-core:
     cd packages/visp_core && cargo test
+
+clean:
+    cd apps/visp_desktop && flutter clean
+    cd packages/visp_core && cargo clean
+    rm -rf target
