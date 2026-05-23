@@ -17,6 +17,14 @@ bootstrap:
 codegen:
     melos run codegen
 
+build-windows:
+    just codegen
+    cd apps/visp_desktop && flutter build windows --debug
+
+run-windows:
+    just build-windows
+    start apps/visp_desktop/build/windows/x64/runner/Debug/visp_desktop.exe
+
 run target="windows":
     just codegen
     cd apps/visp_desktop && flutter run -d {{target}}
