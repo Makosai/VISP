@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  visp_bridge:
 
 dev_dependencies:
   flutter_test:
