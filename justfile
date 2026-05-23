@@ -1,3 +1,5 @@
+set windows-shell := ["cmd.exe", "/c"]
+
 default:
     @just --list
 
@@ -18,3 +20,6 @@ codegen:
 run target="windows":
     just codegen
     cd apps/visp_desktop && flutter run -d {{target}}
+
+test-core:
+    cd packages/visp_core && cargo test
