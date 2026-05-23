@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 class VispColors {
   // Brand / Primary
@@ -38,35 +39,54 @@ class VispColors {
 }
 
 class VispTheme {
-  static ThemeData dark() {
-    return ThemeData(
+  static ShadThemeData dark() {
+    return ShadThemeData(
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: VispColors.bgDark,
-      primaryColor: VispColors.primary,
-      colorScheme: const ColorScheme.dark(
+      colorScheme: const ShadZincColorScheme.dark(
         primary: VispColors.primary,
-        surface: VispColors.bgDark,
+        background: VispColors.bgDark,
+        foreground: VispColors.textDark,
+        muted: VispColors.badgeBgDark,
+        mutedForeground: VispColors.textMuted,
+        border: VispColors.borderSelection,
+        secondary: VispColors.badgeBgDark,
+        secondaryForeground: VispColors.textDark,
       ),
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(color: VispColors.textDark),
-        bodyMedium: TextStyle(color: VispColors.textDark),
+      primaryButtonTheme: ShadButtonTheme(
+        backgroundColor: VispColors.primary,
+        hoverBackgroundColor: VispColors.primaryHoverDark,
+        foregroundColor: Colors.white,
+        decoration: ShadDecoration(
+          border: ShadBorder.all(
+            radius: const BorderRadius.all(Radius.circular(4)),
+          ),
+        ),
       ),
-      // Custom extensions here
     );
   }
 
-  static ThemeData light() {
-    return ThemeData(
+  static ShadThemeData light() {
+    return ShadThemeData(
       brightness: Brightness.light,
-      scaffoldBackgroundColor: VispColors.bgLight,
-      primaryColor: VispColors.primary,
-      colorScheme: const ColorScheme.light(
+      colorScheme: const ShadZincColorScheme.light(
         primary: VispColors.primary,
-        surface: VispColors.bgLight,
+        background: VispColors.bgLight,
+        foreground: VispColors.textLight,
+        muted: VispColors.badgeBgLight,
+        mutedForeground: VispColors.textMuted,
+        border: VispColors.borderSelection,
+        secondary: VispColors.badgeBgLight,
+        secondaryForeground: VispColors.textLight,
       ),
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(color: VispColors.textLight),
-        bodyMedium: TextStyle(color: VispColors.textLight),
+      primaryButtonTheme: ShadButtonTheme(
+        backgroundColor: VispColors.primary,
+        hoverBackgroundColor: VispColors.primaryHoverLight,
+        foregroundColor: Colors.white,
+        decoration: ShadDecoration(
+          border: ShadBorder.all(
+            radius: const BorderRadius.all(Radius.circular(4)),
+          ),
+        ),
       ),
     );
   }

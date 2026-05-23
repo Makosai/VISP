@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:visp_bridge/visp_bridge.dart';
 import 'package:visp_flutter_ui/visp_flutter_ui.dart';
 
 void main() async {
-  // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize Rust Core via FFI
   await RustLib.init();
-
   runApp(const VispApp());
 }
 
@@ -17,12 +14,12 @@ class VispApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ShadApp(
       title: 'VISP Desktop',
       debugShowCheckedModeBanner: false,
       theme: VispTheme.light(),
       darkTheme: VispTheme.dark(),
-      themeMode: ThemeMode.dark, // Default to dark as per project vibe
+      themeMode: ThemeMode.dark,
       home: const EditorWorkspace(),
     );
   }

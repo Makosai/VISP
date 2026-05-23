@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 import '../atoms/view_selector.dart';
 import '../theme/visp_theme.dart';
 
@@ -14,14 +15,12 @@ class TopNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme
-        .of(context)
-        .brightness == Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDark ? VispColors.textDark : VispColors.textLight;
 
     return Container(
-      height: 48,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      height: 36,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         color: isDark ? VispColors.bgDark : VispColors.bgLight,
         border: Border(
@@ -30,20 +29,23 @@ class TopNavigationBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          ViewSelector(
-            currentView: currentView,
-            onChanged: onViewChanged,
+          SizedBox(
+            height: 28,
+            child: ViewSelector(
+              currentView: currentView,
+              onChanged: onViewChanged,
+            ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 8),
           _MenuButton(label: 'File', textColor: textColor),
           _MenuButton(label: 'Edit', textColor: textColor),
           _MenuButton(label: 'View', textColor: textColor),
           _MenuButton(label: 'Help', textColor: textColor),
-          const VerticalDivider(
-            indent: 12,
-            endIndent: 12,
-            width: 32,
-            color: VispColors.iconUnselected,
+          VerticalDivider(
+            indent: 8,
+            endIndent: 8,
+            width: 24,
+            color: VispColors.borderSelection,
           ),
           Expanded(
             child: _buildDynamicToolbar(context),
@@ -54,7 +56,6 @@ class TopNavigationBar extends StatelessWidget {
   }
 
   Widget _buildDynamicToolbar(BuildContext context) {
-    // Placeholder for dynamic items based on view
     switch (currentView) {
       case VispView.video:
         return _VideoToolbar();
@@ -76,28 +77,27 @@ class _MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return ShadButton.ghost(
       onPressed: () {},
-      style: TextButton.styleFrom(
-        foregroundColor: textColor,
-        textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+      size: ShadButtonSize.sm,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      foregroundColor: textColor,
+      child: Text(
+        label,
+        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
       ),
-      child: Text(label),
     );
   }
 }
 
-// Dummy Toolbars for now
 class _VideoToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        Icon(Icons.cut_outlined, size: 20, color: VispColors.iconUnselected),
-        SizedBox(width: 16),
-        Icon(Icons.slow_motion_video, size: 20,
-            color: VispColors.iconUnselected),
+        Icon(LucideIcons.scissors, size: 16, color: VispColors.iconUnselected),
+        SizedBox(width: 12),
+        Icon(LucideIcons.film, size: 16, color: VispColors.iconUnselected),
       ],
     );
   }
@@ -108,10 +108,9 @@ class _ImageToolbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        Icon(Icons.crop_outlined, size: 20, color: VispColors.iconUnselected),
-        SizedBox(width: 16),
-        Icon(Icons.color_lens_outlined, size: 20,
-            color: VispColors.iconUnselected),
+        Icon(LucideIcons.crop, size: 16, color: VispColors.iconUnselected),
+        SizedBox(width: 12),
+        Icon(LucideIcons.palette, size: 16, color: VispColors.iconUnselected),
       ],
     );
   }
@@ -122,11 +121,9 @@ class _SoundToolbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        Icon(Icons.equalizer_outlined, size: 20,
-            color: VispColors.iconUnselected),
-        SizedBox(width: 16),
-        Icon(Icons.volume_up_outlined, size: 20,
-            color: VispColors.iconUnselected),
+        Icon(LucideIcons.sliders, size: 16, color: VispColors.iconUnselected),
+        SizedBox(width: 12),
+        Icon(LucideIcons.volume2, size: 16, color: VispColors.iconUnselected),
       ],
     );
   }
@@ -137,11 +134,9 @@ class _PostToolbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        Icon(Icons.schedule_send_outlined, size: 20,
-            color: VispColors.iconUnselected),
-        SizedBox(width: 16),
-        Icon(Icons.analytics_outlined, size: 20,
-            color: VispColors.iconUnselected),
+        Icon(LucideIcons.send, size: 16, color: VispColors.iconUnselected),
+        SizedBox(width: 12),
+        Icon(LucideIcons.barChart, size: 16, color: VispColors.iconUnselected),
       ],
     );
   }
