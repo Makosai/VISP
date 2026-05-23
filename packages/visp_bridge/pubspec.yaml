@@ -1,7 +1,9 @@
 name: visp_bridge
-description: "A new Flutter package project."
+description: "Automated FFI bridge glue layer."
 version: 0.0.1
 homepage:
+
+resolution: workspace
 
 environment:
   sdk: ^3.12.0

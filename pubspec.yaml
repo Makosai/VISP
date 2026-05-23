@@ -1,5 +1,5 @@
 name: visp_workspace
-description: "High-performance multimedia engine workspace"
+description: "High-performance multimedia engine workspace."
 version: 1.0.0+1
 publish_to: 'none'
 

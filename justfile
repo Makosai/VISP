@@ -5,7 +5,7 @@ default:
 
 setup:
     @echo "Installing flutter_rust_bridge_codegen..."
-    cargo install flutter_rust_bridge_codegen --version ^2.0.0
+    cargo install flutter_rust_bridge_codegen
     @echo "Activating Melos globally..."
     dart pub global activate melos
     just bootstrap

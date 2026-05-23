@@ -1,7 +1,9 @@
 name: visp_flutter_ui
-description: "A new Flutter package project."
+description: "Atomic design UI package for VISP."
 version: 0.0.1
 homepage:
+
+resolution: workspace
 
 environment:
   sdk: ^3.12.0
