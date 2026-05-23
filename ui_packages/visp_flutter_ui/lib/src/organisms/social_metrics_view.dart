@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visp_bridge/visp_bridge.dart';
 import '../atoms/btn_fetch_metrics.dart';
+import '../theme/visp_theme.dart';
 
 class SocialMetricsView extends StatefulWidget {
   const SocialMetricsView({super.key});
@@ -42,12 +43,15 @@ class _SocialMetricsViewState extends State<SocialMetricsView> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           _metrics,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: isDark ? VispColors.textDark : VispColors.textLight,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 24),

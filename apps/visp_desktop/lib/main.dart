@@ -19,10 +19,10 @@ class VispApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'VISP Desktop',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: VispTheme.light(),
+      darkTheme: VispTheme.dark(),
+      themeMode: ThemeMode.dark, // Default to dark as per project vibe
       home: const EditorWorkspace(),
     );
   }
