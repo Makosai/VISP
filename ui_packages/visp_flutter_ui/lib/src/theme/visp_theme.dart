@@ -53,8 +53,13 @@ class VispTheme {
       ),
       radius: BorderRadius.all(Radius.circular(10)),
       menubarTheme: ShadMenubarTheme(
+        buttonHoverBackgroundColor: Colors.transparent,
         backgroundColor: Colors.transparent,
+        buttonForegroundColor: VispColors.textMuted,
+        buttonHoverForegroundColor: VispColors.textDark,
+        selectOnHover: false,
         padding: EdgeInsets.zero,
+        buttonPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
         decoration: ShadDecoration(
           border: ShadBorder.all(color: VispColors.borderNormal, width: 0.5),
         ),

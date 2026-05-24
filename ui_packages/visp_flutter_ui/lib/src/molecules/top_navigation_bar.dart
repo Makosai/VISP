@@ -25,6 +25,7 @@ class TopNavigationBar extends StatelessWidget {
         Container(
           height: 28,
           padding: const EdgeInsets.symmetric(horizontal: 12),
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             color: isDark ? VispColors.bgDark : VispColors.bgLight,
             border: Border(
@@ -108,7 +109,6 @@ class _SystemMenubar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadMenubar(
-      selectOnHover: false,
       items: [
         ShadMenubarItem(
           items: [
@@ -121,20 +121,14 @@ class _SystemMenubar extends StatelessWidget {
             ShadContextMenuItem(child: const Text('Save'), onPressed: () {}),
             ShadContextMenuItem(child: const Text('Exit'), onPressed: () {}),
           ],
-          child: const Text(
-            'File',
-            style: TextStyle(fontSize: 12, color: VispColors.textMuted),
-          ),
+          child: const Text('File', style: TextStyle(fontSize: 12)),
         ),
         ShadMenubarItem(
           items: [
             ShadContextMenuItem(child: const Text('Undo'), onPressed: () {}),
             ShadContextMenuItem(child: const Text('Redo'), onPressed: () {}),
           ],
-          child: const Text(
-            'Edit',
-            style: TextStyle(fontSize: 12, color: VispColors.textMuted),
-          ),
+          child: const Text('Edit', style: TextStyle(fontSize: 12)),
         ),
         ShadMenubarItem(
           items: [
@@ -143,10 +137,7 @@ class _SystemMenubar extends StatelessWidget {
               onPressed: () {},
             ),
           ],
-          child: const Text(
-            'View',
-            style: TextStyle(fontSize: 12, color: VispColors.textMuted),
-          ),
+          child: const Text('View', style: TextStyle(fontSize: 12)),
         ),
         ShadMenubarItem(
           items: [
@@ -155,10 +146,7 @@ class _SystemMenubar extends StatelessWidget {
               onPressed: () {},
             ),
           ],
-          child: const Text(
-            'Help',
-            style: TextStyle(fontSize: 12, color: VispColors.textMuted),
-          ),
+          child: const Text('Help', style: TextStyle(fontSize: 12)),
         ),
       ],
     );
