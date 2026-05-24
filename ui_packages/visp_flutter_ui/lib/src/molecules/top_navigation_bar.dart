@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+
 import '../atoms/view_selector.dart';
 import '../theme/visp_theme.dart';
 
@@ -16,42 +17,74 @@ class TopNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDark ? VispColors.textDark : VispColors.textLight;
 
-    return Container(
-      height: 36,
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(
-        color: isDark ? VispColors.bgDark : VispColors.bgLight,
-        border: Border(
-          bottom: BorderSide(color: VispColors.borderSelection, width: 0.5),
-        ),
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            height: 28,
-            child: ViewSelector(
-              currentView: currentView,
-              onChanged: onViewChanged,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Top Tier: VISP Title and System Menu (Thin, 28px)
+        Container(
+          height: 28,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: isDark ? VispColors.bgDark : VispColors.bgLight,
+            border: Border(
+              bottom: BorderSide(color: VispColors.borderSelection, width: 0.5),
             ),
           ),
-          const SizedBox(width: 8),
-          _MenuButton(label: 'File', textColor: textColor),
-          _MenuButton(label: 'Edit', textColor: textColor),
-          _MenuButton(label: 'View', textColor: textColor),
-          _MenuButton(label: 'Help', textColor: textColor),
-          VerticalDivider(
-            indent: 8,
-            endIndent: 8,
-            width: 24,
-            color: VispColors.borderSelection,
+          child: Row(
+            children: [
+              Text(
+                'VISP',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? VispColors.textDark : VispColors.textLight,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const SizedBox(width: 16),
+              const Expanded(child: _SystemMenubar()),
+            ],
           ),
-          Expanded(
-            child: _buildDynamicToolbar(context),
+        ),
+        // Bottom Tier: View Selector and Toolbars (Thicker, 52px)
+        Container(
+          height: 52,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          decoration: BoxDecoration(
+            color: isDark ? VispColors.bgDark : VispColors.bgLight,
+            border: Border(
+              bottom: BorderSide(color: VispColors.borderSelection, width: 0.5),
+            ),
           ),
-        ],
-      ),
+          child: Row(
+            children: [
+              SizedBox(
+                height: 32,
+                child: ViewSelector(
+                  currentView: currentView,
+                  onChanged: onViewChanged,
+                ),
+              ),
+              Expanded(child: Center(child: _buildDynamicToolbar(context))),
+              // Right-side actions
+              _ToolbarAction(
+                icon: LucideIcons.share2,
+                label: 'Share',
+                onPressed: () {},
+                isOutline: true,
+              ),
+              const SizedBox(width: 8),
+              ShadButton(
+                onPressed: () {},
+                size: ShadButtonSize.sm,
+                leading: const Icon(LucideIcons.arrowBigDownDash, size: 16),
+                child: const Text('Export'),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -69,22 +102,147 @@ class TopNavigationBar extends StatelessWidget {
   }
 }
 
-class _MenuButton extends StatelessWidget {
-  final String label;
-  final Color textColor;
-
-  const _MenuButton({required this.label, required this.textColor});
+class _SystemMenubar extends StatelessWidget {
+  const _SystemMenubar();
 
   @override
   Widget build(BuildContext context) {
-    return ShadButton.ghost(
-      onPressed: () {},
-      size: ShadButtonSize.sm,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      foregroundColor: textColor,
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+    return ShadMenubar(
+      selectOnHover: false,
+      items: [
+        ShadMenubarItem(
+          items: [
+            ShadContextMenuItem(
+              child: const Text('New Project'),
+              onPressed: () {},
+            ),
+            ShadContextMenuItem(child: const Text('Open...'), onPressed: () {}),
+            const Divider(),
+            ShadContextMenuItem(child: const Text('Save'), onPressed: () {}),
+            ShadContextMenuItem(child: const Text('Exit'), onPressed: () {}),
+          ],
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              'File',
+              style: TextStyle(fontSize: 12, color: VispColors.textMuted),
+            ),
+          ),
+        ),
+        ShadMenubarItem(
+          items: [
+            ShadContextMenuItem(child: const Text('Undo'), onPressed: () {}),
+            ShadContextMenuItem(child: const Text('Redo'), onPressed: () {}),
+          ],
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              'Edit',
+              style: TextStyle(fontSize: 12, color: VispColors.textMuted),
+            ),
+          ),
+        ),
+        ShadMenubarItem(
+          items: [
+            ShadContextMenuItem(
+              child: const Text('Full Screen'),
+              onPressed: () {},
+            ),
+          ],
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              'View',
+              style: TextStyle(fontSize: 12, color: VispColors.textMuted),
+            ),
+          ),
+        ),
+        ShadMenubarItem(
+          items: [
+            ShadContextMenuItem(
+              child: const Text('About VISP'),
+              onPressed: () {},
+            ),
+          ],
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              'Help',
+              style: TextStyle(fontSize: 12, color: VispColors.textMuted),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ToolbarAction extends StatefulWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onPressed;
+  final bool isOutline;
+
+  const _ToolbarAction({
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+    this.isOutline = false,
+  });
+
+  @override
+  State<_ToolbarAction> createState() => _ToolbarActionState();
+}
+
+class _ToolbarActionState extends State<_ToolbarAction> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = _isHovered ? VispColors.textDark : VispColors.iconUnselected;
+
+    Widget content = Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(widget.icon, size: 18, color: color),
+        const SizedBox(height: 2),
+        Text(widget.label, style: TextStyle(fontSize: 9, color: color)),
+      ],
+    );
+
+    if (widget.isOutline) {
+      return MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: ShadButton.outline(
+          onPressed: widget.onPressed,
+          size: ShadButtonSize.sm,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: ShadDecoration(
+            border: ShadBorder.all(
+              color: _isHovered
+                  ? VispColors.textDark
+                  : VispColors.borderSelection,
+              width: 1,
+            ),
+          ),
+          child: content,
+        ),
+      );
+    }
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: widget.onPressed,
+        child: SizedBox(
+          width: 50, // Fixed width for action buttons
+          child: content,
+        ),
       ),
     );
   }
@@ -93,11 +251,30 @@ class _MenuButton extends StatelessWidget {
 class _VideoToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(LucideIcons.scissors, size: 16, color: VispColors.iconUnselected),
-        SizedBox(width: 12),
-        Icon(LucideIcons.film, size: 16, color: VispColors.iconUnselected),
+        _ToolbarAction(
+          icon: LucideIcons.scissors,
+          label: 'Cut',
+          onPressed: () {},
+        ),
+        _ToolbarAction(icon: LucideIcons.copy, label: 'Copy', onPressed: () {}),
+        _ToolbarAction(
+          icon: LucideIcons.clipboardPaste,
+          label: 'Paste',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.split,
+          label: 'Split',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.trash2,
+          label: 'Delete',
+          onPressed: () {},
+        ),
       ],
     );
   }
@@ -106,11 +283,30 @@ class _VideoToolbar extends StatelessWidget {
 class _ImageToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(LucideIcons.crop, size: 16, color: VispColors.iconUnselected),
-        SizedBox(width: 12),
-        Icon(LucideIcons.palette, size: 16, color: VispColors.iconUnselected),
+        _ToolbarAction(icon: LucideIcons.crop, label: 'Crop', onPressed: () {}),
+        _ToolbarAction(
+          icon: LucideIcons.palette,
+          label: 'Color',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.layers,
+          label: 'Layers',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.wand2,
+          label: 'Effects',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.rotateCcw,
+          label: 'Rotate',
+          onPressed: () {},
+        ),
       ],
     );
   }
@@ -119,11 +315,34 @@ class _ImageToolbar extends StatelessWidget {
 class _SoundToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(LucideIcons.sliders, size: 16, color: VispColors.iconUnselected),
-        SizedBox(width: 12),
-        Icon(LucideIcons.volume2, size: 16, color: VispColors.iconUnselected),
+        _ToolbarAction(
+          icon: LucideIcons.sliders,
+          label: 'Mix',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.volume2,
+          label: 'Volume',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.mic,
+          label: 'Record',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.activity,
+          label: 'Wave',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.music,
+          label: 'Library',
+          onPressed: () {},
+        ),
       ],
     );
   }
@@ -132,11 +351,26 @@ class _SoundToolbar extends StatelessWidget {
 class _PostToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(LucideIcons.send, size: 16, color: VispColors.iconUnselected),
-        SizedBox(width: 12),
-        Icon(LucideIcons.barChart, size: 16, color: VispColors.iconUnselected),
+        _ToolbarAction(icon: LucideIcons.send, label: 'Send', onPressed: () {}),
+        _ToolbarAction(
+          icon: LucideIcons.calendar,
+          label: 'Schedule',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.barChart,
+          label: 'Stats',
+          onPressed: () {},
+        ),
+        _ToolbarAction(
+          icon: LucideIcons.messageSquare,
+          label: 'Inbox',
+          onPressed: () {},
+        ),
+        _ToolbarAction(icon: LucideIcons.hash, label: 'Tags', onPressed: () {}),
       ],
     );
   }

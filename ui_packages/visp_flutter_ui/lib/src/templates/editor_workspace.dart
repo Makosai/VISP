@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../molecules/top_navigation_bar.dart';
+
 import '../atoms/view_selector.dart';
+import '../molecules/top_navigation_bar.dart';
 import '../organisms/social_metrics_view.dart';
+import '../theme/visp_theme.dart';
 
 class EditorWorkspace extends StatefulWidget {
   const EditorWorkspace({super.key});
@@ -23,16 +25,17 @@ class _EditorWorkspaceState extends State<EditorWorkspace> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
+      backgroundColor: isDark ? VispColors.bgDark : VispColors.bgLight,
       body: Column(
         children: [
           TopNavigationBar(
             currentView: _currentView,
             onViewChanged: _handleViewChanged,
           ),
-          Expanded(
-            child: _buildBody(),
-          ),
+          Expanded(child: _buildBody()),
         ],
       ),
     );
@@ -46,7 +49,11 @@ class _EditorWorkspaceState extends State<EditorWorkspace> {
         return Center(
           child: Text(
             '${_currentView.label} Workspace Placeholder',
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? VispColors.textDark
+                  : VispColors.textLight,
+            ),
           ),
         );
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+
 import '../theme/visp_theme.dart';
 
 enum VispView {
@@ -25,44 +26,66 @@ class ViewSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bgColor = isDark ? VispColors.badgeBgDark : VispColors.badgeBgLight;
+    final fgColor = isDark ? VispColors.textDark : VispColors.textLight;
+    final mutedColor = VispColors.textMuted;
+
     return ShadSelect<VispView>(
       initialValue: currentView,
       onChanged: onChanged,
       minWidth: 140,
+      maxHeight: 300,
       decoration: ShadDecoration(
         border: ShadBorder.all(
           color: VispColors.borderSelection,
           width: 0.5,
           radius: BorderRadius.circular(4),
         ),
-        color: Theme.of(context).brightness == Brightness.dark
-            ? VispColors.badgeBgDark
-            : VispColors.badgeBgLight,
+        color: bgColor,
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
       selectedOptionBuilder: (context, view) {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(view.icon, size: 16, color: VispColors.primary),
-            const SizedBox(width: 8),
+            Icon(view.icon, size: 16, color: fgColor),
+            const SizedBox(width: 10),
             Text(
               view.label,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: fgColor,
+              ),
             ),
           ],
         );
       },
       options: VispView.values
-          .map((view) => ShadOption(
-                value: view,
-                child: Row(
-                  children: [
-                    Icon(view.icon, size: 16, color: VispColors.primary),
-                    const SizedBox(width: 8),
-                    Text(view.label),
-                  ],
-                ),
-              ))
+          .map(
+            (view) => ShadOption(
+              value: view,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              child: Row(
+                children: [
+                  Icon(
+                    view.icon,
+                    size: 16,
+                    color: view == currentView ? fgColor : mutedColor,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    view.label,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: view == currentView ? fgColor : mutedColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
           .toList(),
     );
   }
