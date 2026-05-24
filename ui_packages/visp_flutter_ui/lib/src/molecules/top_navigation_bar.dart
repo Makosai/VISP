@@ -37,7 +37,7 @@ class TopNavigationBar extends StatelessWidget {
                 'VISP',
                 style: TextStyle(
                   fontSize: 11,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w400,
                   color: isDark ? VispColors.textDark : VispColors.textLight,
                   letterSpacing: 1.2,
                 ),
@@ -60,7 +60,7 @@ class TopNavigationBar extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                height: 32,
+                height: 40,
                 child: ViewSelector(
                   currentView: currentView,
                   onChanged: onViewChanged,
@@ -68,11 +68,11 @@ class TopNavigationBar extends StatelessWidget {
               ),
               Expanded(child: Center(child: _buildDynamicToolbar(context))),
               // Right-side actions
-              _ToolbarAction(
-                icon: LucideIcons.share2,
-                label: 'Share',
+              ShadButton.outline(
                 onPressed: () {},
-                isOutline: true,
+                size: ShadButtonSize.sm,
+                leading: const Icon(LucideIcons.share2, size: 16),
+                child: const Text('Share'),
               ),
               const SizedBox(width: 8),
               ShadButton(
@@ -121,12 +121,9 @@ class _SystemMenubar extends StatelessWidget {
             ShadContextMenuItem(child: const Text('Save'), onPressed: () {}),
             ShadContextMenuItem(child: const Text('Exit'), onPressed: () {}),
           ],
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              'File',
-              style: TextStyle(fontSize: 12, color: VispColors.textMuted),
-            ),
+          child: const Text(
+            'File',
+            style: TextStyle(fontSize: 12, color: VispColors.textMuted),
           ),
         ),
         ShadMenubarItem(
@@ -134,12 +131,9 @@ class _SystemMenubar extends StatelessWidget {
             ShadContextMenuItem(child: const Text('Undo'), onPressed: () {}),
             ShadContextMenuItem(child: const Text('Redo'), onPressed: () {}),
           ],
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              'Edit',
-              style: TextStyle(fontSize: 12, color: VispColors.textMuted),
-            ),
+          child: const Text(
+            'Edit',
+            style: TextStyle(fontSize: 12, color: VispColors.textMuted),
           ),
         ),
         ShadMenubarItem(
@@ -149,12 +143,9 @@ class _SystemMenubar extends StatelessWidget {
               onPressed: () {},
             ),
           ],
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              'View',
-              style: TextStyle(fontSize: 12, color: VispColors.textMuted),
-            ),
+          child: const Text(
+            'View',
+            style: TextStyle(fontSize: 12, color: VispColors.textMuted),
           ),
         ),
         ShadMenubarItem(
@@ -164,12 +155,9 @@ class _SystemMenubar extends StatelessWidget {
               onPressed: () {},
             ),
           ],
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              'Help',
-              style: TextStyle(fontSize: 12, color: VispColors.textMuted),
-            ),
+          child: const Text(
+            'Help',
+            style: TextStyle(fontSize: 12, color: VispColors.textMuted),
           ),
         ),
       ],
@@ -220,12 +208,7 @@ class _ToolbarActionState extends State<_ToolbarAction> {
           size: ShadButtonSize.sm,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: ShadDecoration(
-            border: ShadBorder.all(
-              color: _isHovered
-                  ? VispColors.textDark
-                  : VispColors.borderSelection,
-              width: 1,
-            ),
+            border: ShadBorder.all(color: color, width: 1),
           ),
           child: content,
         ),
@@ -271,7 +254,7 @@ class _VideoToolbar extends StatelessWidget {
           onPressed: () {},
         ),
         _ToolbarAction(
-          icon: LucideIcons.trash2,
+          icon: LucideIcons.eraser,
           label: 'Delete',
           onPressed: () {},
         ),

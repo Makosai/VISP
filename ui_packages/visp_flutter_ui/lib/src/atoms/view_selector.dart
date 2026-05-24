@@ -27,23 +27,13 @@ class ViewSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor = isDark ? VispColors.badgeBgDark : VispColors.badgeBgLight;
     final fgColor = isDark ? VispColors.textDark : VispColors.textLight;
     final mutedColor = VispColors.textMuted;
 
     return ShadSelect<VispView>(
       initialValue: currentView,
       onChanged: onChanged,
-      minWidth: 140,
-      maxHeight: 300,
-      decoration: ShadDecoration(
-        border: ShadBorder.all(
-          color: VispColors.borderSelection,
-          width: 0.5,
-          radius: BorderRadius.circular(4),
-        ),
-        color: bgColor,
-      ),
+      minWidth: 130,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
       selectedOptionBuilder: (context, view) {
         return Row(
@@ -54,7 +44,7 @@ class ViewSelector extends StatelessWidget {
             Text(
               view.label,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: fgColor,
               ),
