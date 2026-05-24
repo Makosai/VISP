@@ -10,9 +10,9 @@ class VispColors {
   // Text
   static const Color textDark = Color(0xFFEBEBEB);
   static const Color textLight = Color(0xFF4D4D4D);
-  static const Color textMuted = Color(0xFF4D4D4D);
 
   // Badge / Icon BG
+  static const Color textMuted = Color(0xFF7A7A7A);
   static const Color badgeBgDark = Color(0xFF222222);
   static const Color badgeFgDark = Color(0xFF4D4D4D);
 
@@ -24,11 +24,11 @@ class VispColors {
   static const Color borderSelection = Color(0xFF394761);
 
   // Backgrounds
-  static const Color bgDark = Color(0xFF232325);
+  static const Color bgDark = Color(0xFF232323);
   static const Color bgLight = Color(0xFFD5D5D4);
 
   // Icons
-  static const Color iconUnselected = Color(0xFF79797B);
+  static const Color iconUnselected = Color(0xFF7A7A7A);
 
   // Standard/Utility Colors
   static const Color blue = Color(0xFF1F3554);
@@ -49,6 +49,7 @@ class VispTheme {
         muted: VispColors.badgeBgDark,
         mutedForeground: VispColors.textMuted,
         border: VispColors.borderSelection,
+        popover: VispColors.bgDark,
         secondary: VispColors.badgeBgDark,
         secondaryForeground: VispColors.textDark,
       ),
@@ -61,6 +62,21 @@ class VispTheme {
             radius: const BorderRadius.all(Radius.circular(4)),
           ),
         ),
+      ),
+      secondaryButtonTheme: ShadButtonTheme(
+        backgroundColor: VispColors.badgeBgDark,
+        foregroundColor: VispColors.textDark,
+        decoration: ShadDecoration(
+          border: ShadBorder.all(
+            radius: const BorderRadius.all(Radius.circular(4)),
+            color: VispColors.borderSelection,
+            width: 1,
+          ),
+        ),
+      ),
+      ghostButtonTheme: const ShadButtonTheme(
+        foregroundColor: VispColors.textMuted,
+        hoverForegroundColor: VispColors.textDark,
       ),
     );
   }
@@ -75,6 +91,7 @@ class VispTheme {
         muted: VispColors.badgeBgLight,
         mutedForeground: VispColors.textMuted,
         border: VispColors.borderSelection,
+        popover: VispColors.bgLight,
         secondary: VispColors.badgeBgLight,
         secondaryForeground: VispColors.textLight,
       ),

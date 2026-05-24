@@ -34,7 +34,8 @@ dependencies:
     sdk: flutter
   visp_bridge:
   visp_flutter_ui:
-  cupertino_icons: ^1.0.8
+  shadcn_ui: ^0.54.0
+  cupertino_icons: ^1.0.9
 
 dev_dependencies:
   flutter_test:
